@@ -1,0 +1,81 @@
+<ehcache xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:noNamespaceSchemaLocation="ehcache.xsd" 
+	updateCheck="true"
+	monitoring="autodetect" 
+	dynamicConfig="true">
+
+	<diskStore path="java.io.tmpdir" />
+	
+	<!-- A cada semana -->
+	<cache name="usuariosCombobox" 
+		maxEntriesLocalHeap="1000"
+		maxEntriesLocalDisk="10000" 
+		eternal="false" 
+		diskSpoolBufferSizeMB="20"
+		timeToIdleSeconds="604800" timeToLiveSeconds="604800"
+		memoryStoreEvictionPolicy="LRU" 
+		transactionalMode="off">
+		<persistence strategy="localTempSwap" />
+	</cache>
+	
+	<!-- De 4 em 4 horas -->
+	<cache name="abonosPorMesEUsuarioCorrente" 
+		maxEntriesLocalHeap="1000"
+		maxEntriesLocalDisk="10000" 
+		eternal="false" 
+		diskSpoolBufferSizeMB="20"
+		timeToIdleSeconds="14400" timeToLiveSeconds="14400"
+		memoryStoreEvictionPolicy="LRU" 
+		transactionalMode="off">
+		<persistence strategy="localTempSwap" />
+	</cache>
+	
+	<!-- De 4 em 4 horas -->
+	<cache name="feriadosPorMesEUsuarioCorrente" 
+		maxEntriesLocalHeap="1000"
+		maxEntriesLocalDisk="10000" 
+		eternal="false" 
+		diskSpoolBufferSizeMB="20"
+		timeToIdleSeconds="14400" timeToLiveSeconds="14400"
+		memoryStoreEvictionPolicy="LRU" 
+		transactionalMode="off">
+		<persistence strategy="localTempSwap" />
+	</cache>
+	
+	<!-- De 4 em 4 horas -->
+	<cache name="feriados" 
+		maxEntriesLocalHeap="1000"
+		maxEntriesLocalDisk="10000" 
+		eternal="false" 
+		diskSpoolBufferSizeMB="20"
+		timeToIdleSeconds="14400" timeToLiveSeconds="14400"
+		memoryStoreEvictionPolicy="LRU" 
+		transactionalMode="off">
+		<persistence strategy="localTempSwap" />
+	</cache>
+	
+	<!-- De 4 em 4 horas -->
+	<cache name="abonos" 
+		maxEntriesLocalHeap="1000"
+		maxEntriesLocalDisk="10000" 
+		eternal="false" 
+		diskSpoolBufferSizeMB="20"
+		timeToIdleSeconds="14400" timeToLiveSeconds="14400"
+		memoryStoreEvictionPolicy="LRU" 
+		transactionalMode="off">
+		<persistence strategy="localTempSwap" />
+	</cache>
+	
+	<!-- A cada 1 mês -->
+	<cache name="usuarioPorId" 
+		maxEntriesLocalHeap="1000"
+		maxEntriesLocalDisk="10000" 
+		eternal="false" 
+		diskSpoolBufferSizeMB="20"
+		timeToIdleSeconds="2629800" timeToLiveSeconds="2629800"
+		memoryStoreEvictionPolicy="LRU" 
+		transactionalMode="off">
+		<persistence strategy="localTempSwap" />
+	</cache>
+
+</ehcache>

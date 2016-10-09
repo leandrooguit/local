@@ -1,0 +1,17 @@
+
+.login-box {
+	left: -40px !important;
+	background: url(../img/login-box-backg.png) no-repeat left top;
+	padding: 70px 100px 80px 98px !important;
+	color: white !important;
+}
+
+.login-box input {
+	border: 1px solid #0d2c52 !important;
+	background-color:#1e4f8a !important;
+	color: #ebebeb !important;
+}
+
+.login-box hr {
+	border-top: dotted 1px white;
+}

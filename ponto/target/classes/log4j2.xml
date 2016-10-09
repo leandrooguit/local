@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration>
+	<Appenders>
+		<File name="A1" fileName="ponto.log" append="false">
+			<PatternLayout pattern="%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n"/>
+		</File>
+		<Console name="STDOUT" target="SYSTEM_OUT">
+			<PatternLayout pattern="%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n"/>
+		</Console>
+	</Appenders>
+	<Loggers>
+		<Logger name="org.apache.log4j.xml" level="error">
+			<AppenderRef ref="A1" />
+		</Logger>
+		<Logger name="ponto.model.dao" level="debug">
+<!-- 			<AppenderRef ref="STDOUT" /> -->
+		</Logger>
+		<Root level="error">
+			<AppenderRef ref="A1" />
+			<AppenderRef ref="STDOUT" />
+		</Root>
+	</Loggers>
+</Configuration>

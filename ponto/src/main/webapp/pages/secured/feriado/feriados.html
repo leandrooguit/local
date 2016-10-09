@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html layout:decorator="templates/layout">
+<div layout:fragment="content">
+	<div class="row">
+		<div class="col-md-7 col-md-offset-2">
+			<div class="page-header">
+				<h1>Feriados</h1>
+			</div>
+		</div>
+	</div>
+	<div class="row" sec:authorize="hasRole('ROLE_ADMIN')">
+		<div class="col-md-6 col-md-offset-2">
+			<form th:method="post" th:action="@{/feriados}">
+				<div class="row">
+					<div class="col-md-6">
+						<div class="form-group">
+							<label for="nome">Nome</label> <input type="text" id="nome"
+								placeholder="Nome do feriado" required="required"
+								class="form-control" th:field="*{feriado.nome}" />
+						</div>
+					</div>
+					<div class="col-md-3">
+						<div class="form-group">
+							<label for="local">Local</label> <select id="local" name="local"
+								th:field="*{feriado.local}" class="form-control">
+								<option th:each="local : ${localidades}" th:value="${local}"
+									th:text="${local}" />
+							</select>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-4">
+						<label for="data">Data</label> <input type="text" id="data"
+							th:field="*{feriado.data}" class="form-control calendario"
+							required="required">
+					</div>
+					<div class="col-md-4">
+						<label for="persistente">É persistente?</label> <input
+							type="checkbox" id="persistente"
+							th:field="*{feriado.persistente}" class="form-control">
+					</div>
+				</div>
+				<br>
+				<button class="btn btn-success" type="submit">Salvar</button>
+			</form>
+		</div>
+	</div>
+	<br>
+	<div class="row">
+		<div class="col-md-6 col-md-offset-2">
+			<form th:method="post" th:action="@{/feriados/consultar}">
+				<div class="row">
+					<div class="col-md-4">
+						<label for="dataInicial">Data Inicial</label> <input type="text"
+							id="dataInicial" th:field="*{consulta.dataInicial}"
+							class="form-control calendario">
+					</div>
+					<div class="col-md-4">
+						<label for="dataFinal">Data Final</label> <input type="text"
+							id="dataFinal" th:field="*{consulta.dataFinal}"
+							class="form-control calendario">
+					</div>
+					<div class="col-md-2">
+						<button class="btn btn-primary" style="margin-top: 24px" type="submit">Consultar</button>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+	<br>
+	<div class="row">
+		<div class="col-md-7 col-md-offset-2">
+			<table class="table">
+				<thead>
+					<tr>
+						<th>Nome</th>
+						<th>Dia/Mês</th>
+						<th>Local</th>
+						<th>Persistente</th>
+						<th sec:authorize="hasRole('ROLE_ADMIN')">Ações</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr data-th-each="feriado : ${feriados}">
+						<td data-th-text="${feriado.nome}"></td>
+						<td
+							data-th-text="${#joda.format(feriado.data.toDateTimeAtStartOfDay(), 'dd - MMMM - YYYY')}"></td>
+						<td data-th-text="${feriado.local}"></td>
+						<td data-th-text="${feriado.persistente}"></td>
+						<td sec:authorize="hasRole('ROLE_ADMIN')">
+							<div class="btn-group" role="group" aria-label="...">
+								<a th:href="@{/feriados/{id}/editar(id=${feriado.id})}"
+									class="btn btn-primary">Editar</a> <a
+									th:href="@{/feriados/{id}/deletar(id=${feriado.id})}"
+									class="btn btn-danger">Deletar</a>
+							</div>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+</div>
+
+<div layout:fragment="scripts">
+	<script>
+		$(function() {
+			$("#persistente").change(function() {
+				$("#ano").prop("disabled", $("#persistente").is(":checked"));
+			});
+		});
+	</script>
+</div>
+
+</html>

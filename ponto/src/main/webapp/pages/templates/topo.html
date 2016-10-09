@@ -1,0 +1,42 @@
+<header>
+<br>
+<nav class="navbar navbar-default">
+	<div class="container-fluid">
+		<div class="navbar-header">
+			<button type="button" class="navbar-toggle collapsed"
+				data-toggle="collapse" data-target="#navbar" aria-expanded="false"
+				aria-controls="navbar">
+				<span class="sr-only">Navegação</span> <span
+					class="icon-bar"></span> <span class="icon-bar"></span> <span
+					class="icon-bar"></span>
+			</button>
+			<a class="navbar-brand" href="#">Ponto WEB</a>
+		</div>
+		<div id="navbar" class="navbar-collapse collapse">
+			<ul class="nav navbar-nav navbar-right">
+				<li sec:authorize="isAnonymous()"><a th:href="@{/usuarios/login}">Logar</a></li>
+				<li sec:authorize="isAnonymous()"><a th:href="@{/usuarios/}">Cadastre-se</a></li>
+				<li class="dropdown" sec:authorize="isAuthenticated()"><a href="#" class="dropdown-toggle"
+					data-toggle="dropdown" role="button" aria-haspopup="true"
+					aria-expanded="false">Ponto <span class="caret"></span></a>
+					<ul class="dropdown-menu">
+						<li><a th:href="@{/pontos}">Visualizar</a></li>
+						<li><a th:href="@{/pontos/resumo}">Resumo</a></li>
+						<li><a th:href="@{/feriados}">Feriados</a></li>
+						<li><a th:href="@{/abonos}">Abonos</a></li>
+						<li sec:authorize="hasRole('ROLE_ADMIN')"><a th:href="@{/pontos/gerarPontos}">Gerar</a></li>
+					</ul></li>
+				<li class="dropdown" sec:authorize="isAuthenticated()"><a href="#" class="dropdown-toggle"
+					data-toggle="dropdown" role="button" aria-haspopup="true"
+					aria-expanded="false">Usuário <span class="caret"></span></a>
+					<ul class="dropdown-menu">
+						<li><a th:href="@{/usuarios/alterar-senha}">Alterar senha</a></li>
+						<li><a th:href="@{/logout}">Sair</a></li>
+					</ul></li>
+			</ul>
+		</div>
+		<!--/.nav-collapse -->
+	</div>
+	<!--/.container-fluid -->
+</nav>
+</header>

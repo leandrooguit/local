@@ -1,0 +1,17 @@
+<div th:fragment="menuUsuario">
+	<div class="panel list-group">
+		<a href="#" class="list-group-item" data-toggle="collapse" data-target="#sm" data-parent="#menu">Minha conta<span
+			class="label label-info">5</span> <span class="glyphicon glyphicon-envelope pull-right"></span></a>
+		<div id="sm" class="sublinks collapse">
+			<a class="list-group-item small" th:href="@{/usuarios/meusDados}"><span class="glyphicon glyphicon-chevron-right"></span>
+				Meus dados</a> <a class="list-group-item small" th:href="@{/usuarios/alterar-senha}"><span class="glyphicon glyphicon-chevron-right"></span> Alterar seha</a>
+		</div>
+		<a href="#" class="list-group-item" data-toggle="collapse" data-target="#sl" data-parent="#menu">Anúncios <span
+			class="glyphicon glyphicon-tag pull-right"></span></a>
+		<div id="sl" class="sublinks collapse">
+			<a class="list-group-item small"><span class="glyphicon glyphicon-chevron-right"></span> Meus anúncios</a> <a
+				class="list-group-item small"><span class="glyphicon glyphicon-chevron-right"></span> Cadastrar anúncio</a>
+		</div>
+		<a href="#" class="list-group-item">ANOTHER LINK ...<span class="glyphicon glyphicon-stats pull-right"></span></a>
+	</div>
+</div>

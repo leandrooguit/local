@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html layout:decorator="templates/layout">
+<div layout:fragment="content">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-3">
+				<p th:include="secured/usuario/menuUsuario :: menuUsuario" th:remove="tag" />
+			</div>
+			<div class="col-md-8">
+				<p layout:fragment="conteudoPainelUsuario" th:remove="tag" />
+			</div>
+		</div>
+	</div>
+</div>
+</html>

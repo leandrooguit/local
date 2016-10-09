@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html layout:decorator="templates/layout">
+<div layout:fragment="content">
+
+	<div class="page-header">
+		<h1>Pontos</h1>
+	</div>
+
+	<form method="post" th:action="@{/pontos}" th:action="@{/pontos}" th:object="${consulta}">
+		<div class="row">
+			<div class="col-md-3">
+				<div class="form-group">
+					<label for="mesAno">Mês/Ano</label> <input type="text" required="required" maxlength="7" onkeyup="if (/[^0-9 /]+/g.test(this.value)) this.value = this.value.replace(/[^0-9 /]+/g,'')"
+						class="form-control calendarioMesAno" th:field="*{mesAno}">
+				</div>
+			</div>
+			<div class="col-md-3">
+				<div class="form-group" sec:authorize="hasRole('ROLE_ADMIN')">
+					<label for="usuario">Usuário</label> <select id="usuario"
+						name="usuario" th:field="*{idUsuario}" class="form-control">
+						<option th:each="usuario : ${usuarios}" th:value="${usuario.id}"
+							th:text="${usuario.nome}"
+							th:selected="${idUsuario == usuario.id}" />
+				</div>
+			</div>
+			<div class="col-md-3">
+				<button style="margin-top: 25px" type="submit" class="btn btn-primary">Consultar</button>
+			</div>
+		</div>
+		<input type="hidden" th:field="*{idUsuario}"
+			sec:authorize="!hasRole('ROLE_ADMIN')">
+	</form>
+
+	<div class="row">
+		<div class="col-md-7">
+			<table class="table">
+				<thead>
+					<tr>
+						<th>Data</th>
+						<th>Entrada 1</th>
+						<th>Saída 1</th>
+						<th>Entrada 2</th>
+						<th>Saída 2</th>
+						<th>Total</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr data-th-each="ponto : ${pontos}">
+						<td data-th-text="${#joda.format(ponto.entrada1, 'dd/MM/yyyy')}" style="font-weight: bold;"></td>
+						<td data-th-text="${#joda.format(ponto.entrada1, 'HH:mm:ss')}"></td>
+						<td data-th-text="${#joda.format(ponto.saida1, 'HH:mm:ss')}"></td>
+						<td data-th-text="${#joda.format(ponto.entrada2, 'HH:mm:ss')}"></td>
+						<td data-th-text="${#joda.format(ponto.saida2, 'HH:mm:ss')}"></td>
+						<td data-th-text="${ponto.total}" class="info" align="center"></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		<div class="col-md-5">
+			<table class="table">
+				<thead>
+					<tr>
+						<th colspan="2">Resultados</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>Total de horas feitas até hoje</td>
+						<td data-th-text="${totalHorasFeitas}" align="right"></td>
+					</tr>
+					<tr th:if="${totalAteHoje != null}">
+						<td>Total de horas esperadas até hoje</td>
+						<td data-th-text="${totalAteHoje}" align="right"></td>
+					</tr>
+					<tr>
+						<td>Total de horas esperadas no mês</td>
+						<td data-th-text="${total}" align="right"></td>
+					</tr>
+					<tr th:if="${previsaoSaida != null}" class="info">
+						<td>Previsão de Saída</td>
+						<td data-th-text="${previsaoSaida}" align="right"></td>
+					</tr>
+					<tr th:if="${saldo != null}" th:class="${saldo.startsWith('-')} ? 'danger' : 'success'">
+						<td>Saldo no mês</td>
+						<td data-th-text="${saldo}" align="right"></td>
+					</tr>
+					<tr th:if="${saldoGeral != null}" th:class="${saldoGeral.startsWith('-')} ? 'danger' : 'success'">
+						<td>Banco de horas (d-1)</td>
+						<td data-th-text="${saldoGeral}" align="right"></td>
+					</tr>
+				</tbody>
+			</table>
+			<small style="color: red">* Saldo calculado por turnos</small>
+		</div>
+	</div>
+</div>
+
+<div layout:fragment="scripts">
+	<script>
+	$(document).ready(function() {
+	  var mesAno = $("#mesAno").val();
+	  $("#mesAno").val(mesAno.substring(3, 10)); 
+	});
+	</script>
+</div>
+
+</html>

@@ -1,0 +1,22 @@
+<div th:fragment="camposSenha">
+	<div class="row">
+		<div
+			class="col-md-1 col-xs-10 col-sm-8 col-sm-offset-2 col-md-offset-0 col-xs-offset-1">
+			<label for="senha" class="required">Senha</label>
+		</div>
+		<div
+			class="col-md-3 col-xs-10 col-sm-8 col-sm-offset-2 col-md-offset-0 col-xs-offset-1">
+			<input type="password" class="form-control" id="senha"
+				tf:field="*{usuario.senha}">
+		</div>
+		<div
+			class="col-md-2 col-xs-10 col-sm-8 col-sm-offset-1 col-md-offset-0 col-xs-offset-1">
+			<label for="confirmacaoSenha" class="required">Confirmação de Senha</label>
+		</div>
+		<div
+			class="col-md-3 col-xs-10 col-sm-8 col-sm-offset-1 col-md-offset-0 col-xs-offset-1">
+			<input type="password" class="form-control" id="confirmacaoSenha"
+				tf:field="*{usuario.confirmacaoSenha}">
+		</div>
+	</div>
+</div>

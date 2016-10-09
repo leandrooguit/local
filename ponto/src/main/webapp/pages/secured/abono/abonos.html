@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html layout:decorator="templates/layout">
+<div layout:fragment="content">
+	<div class="row">
+		<div class="col-md-12">
+			<div class="page-header">
+				<h1>Abonos</h1>
+			</div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-12">
+			<form th:method="post" th:action="@{/abonos}">
+				<div class="row">
+					<div class="col-md-6">
+						<div class="form-group">
+							<label for="descricao">Descrição</label> <input type="text"
+								id="descricao" placeholder="Descrição do abono"
+								required="required" class="form-control"
+								th:field="*{abono.descricao}" />
+						</div>
+					</div>
+					<div class="col-md-6">
+						<div class="form-group">
+							<label for="tipo">Tipo</label> <select id="tipo" name="tipo"
+								th:field="*{abono.abono}" class="form-control">
+								<option th:each="tipo : ${tipos}" th:value="${tipo}"
+									th:text="${tipo}" />
+							</select>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-3">
+						<label for="data">Data</label> <input type="text" id="data"
+							th:field="*{abono.dataInicial}" class="form-control calendario"
+							required="required">
+					</div>
+					<div class="col-md-3">
+						<label for="dataFinal">Data final</label> <input type="text"
+							id="dataFinal" th:field="*{abono.dataFinal}"
+							class="form-control calendario">
+					</div>
+					<div class="col-md-3">
+						<label for="qtdHoras">Quantidade de horas</label> <input
+							type="text" id="qtdHoras" readonly="readonly"
+							th:field="*{abono.qtdHoras}" class="form-control">
+						<div id="slider"></div>
+					</div>
+					<div class="col-md-3" sec:authorize="hasRole('ROLE_ADMIN')">
+						<div class="form-group">
+							<label for="usuario">Usuário</label> <select id="usuario"
+								name="usuario" th:field="*{abono.usuario}" class="form-control">
+								<option value="0">Todos</option>
+								<option th:each="usuario : ${usuarios}" th:value="${usuario.id}"
+									th:text="${usuario.nome}" />
+						</div>
+					</div>
+					<input type="hidden" th:field="*{abono.usuario}"
+						sec:authorize="!hasRole('ROLE_ADMIN')">
+				</div>
+				<br>
+				<button class="btn btn-success" type="submit">Salvar</button>
+			</form>
+		</div>
+	</div>
+	<br>
+	<div class="row">
+		<div class="col-md-12">
+			<form th:method="post" th:action="@{/abonos/consultar}">
+				<div class="row">
+					<div class="col-md-3">
+						<label for="dataInicialConsulta">Data Inicial</label> <input
+							type="text" id="dataInicialConsulta"
+							th:field="*{consulta.dataInicial}"
+							class="form-control calendario">
+					</div>
+					<div class="col-md-3">
+						<label for="dataFinalConsulta">Data Final</label> <input
+							type="text" id="dataFinalConsulta"
+							th:field="*{consulta.dataFinal}" class="form-control calendario">
+					</div>
+					<div class="col-md-3" sec:authorize="hasRole('ROLE_ADMIN')">
+						<div class="form-group">
+							<label for="usuario">Usuário</label> <select id="usuario"
+								name="usuario" th:field="*{consulta.idUsuario}" class="form-control">
+								<option value="">Todos</option>
+								<option th:each="usuario : ${usuarios}" th:value="${usuario.id}"
+									th:text="${usuario.nome}" />
+						</div>
+					</div>
+					<input type="hidden" th:field="*{consulta.idUsuario}"
+						sec:authorize="!hasRole('ROLE_ADMIN')">
+					<div class="col-md-2">
+						<button class="btn btn-primary" style="margin-top: 24px"
+							type="submit">Consultar</button>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+	<br>
+	<div class="row">
+		<div class="col-md-12">
+			<table class="table">
+				<thead>
+					<tr>
+						<th>Descrição</th>
+						<th>Data inicial</th>
+						<th>Data final</th>
+						<th>Usuário</th>
+						<th>Qtd horas</th>
+						<th>Tipo</th>
+						<th>Aprovado</th>
+						<th>Ações</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr data-th-each="abono : ${abonos}">
+						<td data-th-text="${abono.descricao}"></td>
+						<td
+							data-th-text="${#joda.format(abono.dataInicial.toDateTimeAtStartOfDay(), 'dd/MM/yyyy')}"></td>
+						<td th:if="${abono.dataFinal == null}"></td>
+						<td th:if="${abono.dataFinal != null}"
+							data-th-text="${#joda.format(abono.dataFinal.toDateTimeAtStartOfDay(), 'dd/MM/yyyy')}"></td>
+						<td th:if="${abono.usuario == null}">Todos</td>
+						<td th:if="${abono.usuario != null}"
+							data-th-text="${abono.usuario.nome}"></td>
+						<td data-th-text="${abono.qtdHoras}"></td>
+						<td data-th-text="${abono.abono}"></td>
+						<td data-th-text="${abono.aprovado}"></td>
+						<td>
+							<div class="btn-group" role="group" aria-label="...">
+								<a th:href="@{/abonos/{id}/editar(id=${abono.id})}"
+									class="btn btn-primary">Editar</a> <a
+									th:href="@{/abonos/{id}/deletar(id=${abono.id})}"
+									class="btn btn-danger">Deletar</a> <a
+									th:href="@{/abonos/{id}/aprovar(id=${abono.id})}"
+									th:if="${!abono.aprovado}"
+									sec:authorize="hasRole('ROLE_ADMIN')" class="btn btn-success">Aprovar</a>
+							</div>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+</div>
+
+<div layout:fragment="scripts">
+	<script>
+		$(function() {
+			$("#slider").slider({
+				range : "max",
+				min : 1,
+				max : 8,
+				value : 1,
+				slide : function(event, ui) {
+					$("#qtdHoras").val(ui.value);
+				}
+			});
+			$("#qtdHoras").val($("#slider").slider("value"));
+		});
+	</script>
+</div>
+
+</html>

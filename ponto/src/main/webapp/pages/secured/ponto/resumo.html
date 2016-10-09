@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html layout:decorator="templates/layout">
+<div layout:fragment="content">
+
+	<div class="page-header">
+		<h1>Resumo</h1>
+	</div>
+
+	<table class="table">
+		<thead>
+			<tr>
+				<th>Mês/Ano</th>
+				<th>Total</th>
+				<th>Horas feitas</th>
+				<th>Saldo</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr data-th-each="resumo : ${resumos}" th:class="${resumo.saldo.startsWith('-')} ? 'danger' : 'success'">
+				<td data-th-text="${#joda.format(resumo.mesAno, 'MM/yyyy')}"></td>
+				<td data-th-text="${resumo.total}"></td>
+				<td data-th-text="${resumo.horasFeitas}"></td>
+				<td data-th-text="${resumo.saldo}"></td>
+			</tr>
+		</tbody>
+	</table>
+
+
+	<div layout:fragment="scripts">
+		<script>
+	$(document).ready(function() {
+	  var mesAno = $("#mesAno").val();
+	  $("#mesAno").val(mesAno.substring(3, 10)); 
+	});
+	</script>
+	</div>
+</html>

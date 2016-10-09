@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html layout:decorator="secured/usuario/painelUsuario">
+<div layout:fragment="conteudoPainelUsuario">
+	<form th:method="patch" th:action="@{/usuarios/}" class="pLine-p-form p-form-pLine-extra4color3">
+		<div class="p-form p-shadowed p-form-xs">
+			<div class="p-title text-left">
+				<span class="p-title-line">Dados do usuário&nbsp;&nbsp;<i class="fa fa-pencil-square-o"></i></span>
+			</div>
+			<div>
+				<div th:include="public/usuario/camposUsuario :: camposUsuario" />
+			</div>
+			<div class="text-right">
+				<button class="btn" type="submit" id="btSalvar">
+					<i class="fa fa-check-square-o"></i>&nbsp;salvar
+				</button>
+			</div>
+		</div>
+	</form>
+</div>
+</html>

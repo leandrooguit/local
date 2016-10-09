@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html layout:decorator="templates/layout">
+<div layout:fragment="content">
+	<div class="row">
+		<div class="col-md-4 col-md-offset-4">
+			<div class="page-header">
+				<h1>Alterar Senha</h1>
+			</div>
+			<form th:method="patch" th:action="@{/usuarios/alteracao-senha}">
+				<div class="form-group">
+					<label for="senhaAtual">Senha Atual</label> <input type="password"
+						id="senhaAtual" placeholder="Sua atual senha" required="required"
+						class="form-control" th:field="*{usuario.senhaAtual}" />
+				</div>
+				<div class="form-group">
+					<label for="novaSenha">Nova senha</label> <input type="password"
+						id="novaSenha" placeholder="Sua senha" required="required"
+						class="form-control" th:field="*{usuario.senha}" />
+				</div>
+				<div class="form-group">
+					<label for="confirmacaoSenha">Confirmação de Senha</label> <input
+						type="password" id="confirmacaoSenha"
+						placeholder="Confirme sua senha" required="required"
+						class="form-control" th:field="*{usuario.confirmacaoSenha}" />
+				</div>
+				<button class="btn btn-success" type="submit">Alterar</button>
+			</form>
+		</div>
+	</div>
+</div>
+</html>

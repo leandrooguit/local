@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html layout:decorator="templates/layout">
+<div layout:fragment="content">
+	<div class="row">
+		<div class="col-md-4 col-md-offset-4">
+			<div class="page-header">
+				<h1>Cadastre-se</h1>
+			</div>
+			<form method="post" th:action="@{/usuarios/}">
+				<div>
+					<div th:include="public/usuario/camposUsuario :: camposUsuario" />
+				</div>
+				<!-- 			<div> -->
+				<!-- 				<div th:include="public/usuario/camposSenha :: camposSenha" /> -->
+				<!-- 			</div> -->
+				<button class="btn btn-success" type="submit">Cadastrar</button>
+			</form>
+		</div>
+	</div>
+</div>
+</html>
