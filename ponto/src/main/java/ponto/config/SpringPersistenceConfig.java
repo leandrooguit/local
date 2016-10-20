@@ -40,7 +40,7 @@ public class SpringPersistenceConfig {
 		ComboPooledDataSource dataSource = new ComboPooledDataSource();
 		try {
 			dataSource.setDriverClass("org.hsqldb.jdbc.JDBCDriver");
-			dataSource.setJdbcUrl("jdbc:hsqldb:hsql://localhost/ponto");
+			dataSource.setJdbcUrl("jdbc:hsqldb:hsql://localhost:56999/teste");
 			dataSource.setUser("SA");
 			dataSource.setPassword("");
 			// dataSource.setDriverClass(env.getProperty("driverClass"));
@@ -65,7 +65,7 @@ public class SpringPersistenceConfig {
 		LocalSessionFactoryBean sessionFactory = new LocalSessionFactoryBean();
 		sessionFactory.setDataSource(dataSource());
 		Properties hibernateProperties = new Properties();
-		hibernateProperties.put("hibernate.hbm2ddl.auto", "update");
+		hibernateProperties.put("hibernate.hbm2ddl.auto", "create-drop");
 		hibernateProperties.put("hibernate.dialect",
 				"org.hibernate.dialect.HSQLDialect");
 		hibernateProperties.put("hibernate.show_sql", "true");

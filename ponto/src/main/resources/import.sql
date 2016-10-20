@@ -1,4 +1,4 @@
-insert into usu_usuario (usu_id, usu_nome, usu_senha, usu_login, usu_data_cadastro, usu_versao, usu_local) values (1, 'Admin', 'p0ntON0vU', 'admin', '2015-04-04 01:00:00', 0, 'PE');
+insert into usu_usuario (usu_id, usu_nome, usu_senha, usu_login, usu_data_cadastro, usu_versao, usu_local) values (1, 'Admin', 'a', 'admin', '2015-04-04 01:00:00', 0, 'PE');
 
 insert into aut_autorizacao values ('ROLE_ADMIN');
 insert into aut_autorizacao values ('ROLE_USER');
