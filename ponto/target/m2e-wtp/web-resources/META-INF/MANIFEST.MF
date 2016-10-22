@@ -3,6 +3,7 @@ Implementation-Title: Ponto
 Implementation-Version: 1.0.0
 Built-By: CASA
 Implementation-Vendor-Id: ponto
+Build-Jdk: 1.8.0_77
 Created-By: Maven Integration for Eclipse
 Implementation-Vendor: Pivotal Software, Inc.
 
