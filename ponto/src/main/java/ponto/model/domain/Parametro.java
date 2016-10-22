@@ -9,9 +9,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "par_parametro")
 @AttributeOverrides({
-		@AttributeOverride(name = "id", column = @Column(name = "par_id", nullable = false, insertable = true, updatable = false)),
-		@AttributeOverride(name = "versao", column = @Column(name = "par_versao", nullable = false)),
-		@AttributeOverride(name = "dataCadastro", column = @Column(name = "par_data_cadastro", nullable = false, insertable = true, updatable = false)) })
+		@AttributeOverride(name = "id", column = @Column(name = "par_id", nullable = false, insertable = true, updatable = false)) })
 public class Parametro extends Entidade {
 
 	public static final String PAR_DATA_ULTIMA_EXECUCAO_BANCO_HORAS = "dataUltimaExecucaoBancoHoras";

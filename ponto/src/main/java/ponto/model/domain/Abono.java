@@ -17,9 +17,7 @@ import org.joda.time.LocalDate;
 @Entity
 @Table(name = "abo_abono")
 @AttributeOverrides({
-		@AttributeOverride(name = "id", column = @Column(name = "abo_id", nullable = false, insertable = true, updatable = false)),
-		@AttributeOverride(name = "versao", column = @Column(name = "abo_versao", nullable = false)),
-		@AttributeOverride(name = "dataCadastro", column = @Column(name = "abo_data_cadastro", nullable = false, insertable = true, updatable = false)) })
+		@AttributeOverride(name = "id", column = @Column(name = "abo_id", nullable = false, insertable = true, updatable = false)) })
 public class Abono extends Entidade implements Serializable {
 
 	private static final long serialVersionUID = -8374699036142289097L;

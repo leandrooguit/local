@@ -13,9 +13,7 @@ import org.joda.time.DateTime;
 @Entity
 @Table(name = "dia_dia")
 @AttributeOverrides({
-		@AttributeOverride(name = "id", column = @Column(name = "dia_id", nullable = false, insertable = true, updatable = false)),
-		@AttributeOverride(name = "versao", column = @Column(name = "dia_versao", nullable = false)),
-		@AttributeOverride(name = "dataCadastro", column = @Column(name = "dia_data_cadastro", nullable = false, insertable = true, updatable = false)) })
+		@AttributeOverride(name = "id", column = @Column(name = "dia_id", nullable = false, insertable = true, updatable = false)) })
 public class Dia extends Entidade implements Serializable {
 
 	private static final long serialVersionUID = -2662710674455652057L;

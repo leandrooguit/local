@@ -116,11 +116,6 @@ public class PontoController {
 				.getMonthOfYear() && now.getYear() == mesAno.getYear();
 		mv.addObject("totalAteHoje", pontoService.totalHorasEsperadas(mesAno,
 				mesAnoCorrente, consulta.getIdUsuario(), false, null));
-		mv.addObject("totalHorasFeitas", pontoService.qtdHorasFeitas(pontos));
-		mv.addObject("saldo", pontoService.calcularSaldo(pontos,
-				consulta.getIdUsuario(), false, false, 1));
-		mv.addObject("saldoGeral", pontoService.saldoAteOMesNovo(consulta));
-		mv.addObject("previsaoSaida", pontoService.obterPrevisaoSaida(pontos));
 		ConsultaUsuario consultaUsuario = new ConsultaUsuario();
 		consultaUsuario.addCamposCombobox();
 	}
@@ -138,12 +133,9 @@ public class PontoController {
 			List<Ponto> pontos = pontoService.consultar(consulta);
 			if (CollectionUtils.isNotEmpty(pontos)) {
 				ResumoDTO resumo = new ResumoDTO();
-				resumo.setSaldo(pontoService.calcularSaldo(pontos,
-						consulta.getIdUsuario(), false, false, 1));
 				resumo.setTotal(pontoService.totalHorasEsperadas(
 						now.toLocalDate(), false, consulta.getIdUsuario(),
 						false, null));
-				resumo.setHorasFeitas(pontoService.qtdHorasFeitas(pontos));
 				resumo.setMesAno(now);
 				resumos.add(resumo);
 			}

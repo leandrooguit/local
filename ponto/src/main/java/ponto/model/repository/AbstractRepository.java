@@ -32,15 +32,15 @@ public abstract class AbstractRepository<C extends Consulta<? extends Entidade>,
 
 	public Long save(T entity) {
 		Preconditions.checkNotNull(entity, OBJETO_NAO_PODE_SER_NULO);
-		preencherDataCadastro(entity);
+//		preencherDataCadastro(entity);
 		return (Long) sessionFactory.getCurrentSession().save(entity);
 	}
 
-	private void preencherDataCadastro(T entity) {
+	/*private void preencherDataCadastro(T entity) {
 		if (entity.getDataCadastro() == null) {
 			entity.setDataCadastro(DateTime.now());
 		}
-	}
+	}*/
 
 	public void update(T entity) {
 		Preconditions.checkNotNull(entity, OBJETO_NAO_PODE_SER_NULO);
@@ -49,7 +49,7 @@ public abstract class AbstractRepository<C extends Consulta<? extends Entidade>,
 
 	public void saveOrUpdate(T entity) {
 		Preconditions.checkNotNull(entity, OBJETO_NAO_PODE_SER_NULO);
-		preencherDataCadastro(entity);
+//		preencherDataCadastro(entity);
 		sessionFactory.getCurrentSession().saveOrUpdate(entity);
 	}
 

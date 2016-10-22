@@ -13,14 +13,14 @@ import javax.persistence.Transient;
 
 import org.joda.time.DateTime;
 
+import com.fasterxml.jackson.annotation.JsonTypeInfo.Id;
+
 import ponto.model.service.PontoService;
 
 @Entity
 @Table(name = "pon_ponto")
 @AttributeOverrides({
-		@AttributeOverride(name = "id", column = @Column(name = "pon_id", nullable = false, insertable = true, updatable = false)),
-		@AttributeOverride(name = "versao", column = @Column(name = "pon_versao", nullable = false)),
-		@AttributeOverride(name = "dataCadastro", column = @Column(name = "pon_data_cadastro", nullable = false, insertable = true, updatable = false)) })
+		@AttributeOverride(name = "id", column = @Column(name = "pon_id", nullable = false, insertable = true, updatable = false)) })
 public class Ponto extends Entidade implements Serializable {
 
 	private static final long serialVersionUID = -2662710674455652057L;
@@ -28,9 +28,6 @@ public class Ponto extends Entidade implements Serializable {
 	@ManyToOne
 	@JoinColumn(name = "usu_id", nullable = false)
 	private Usuario usuario;
-
-	@Column(name = "pon_entrada_1", nullable = false)
-	private DateTime entrada1;
 
 	@Column(name = "pon_entrada_2")
 	private DateTime entrada2;
@@ -48,10 +45,6 @@ public class Ponto extends Entidade implements Serializable {
 
 	}
 
-	public String getTotal() {
-		return PontoService.calcularTotal(this);
-	}
-
 	public void setTotal(String total) {
 		this.total = total;
 	}
@@ -62,14 +55,6 @@ public class Ponto extends Entidade implements Serializable {
 
 	public void setUsuario(Usuario usuario) {
 		this.usuario = usuario;
-	}
-
-	public DateTime getEntrada1() {
-		return entrada1;
-	}
-
-	public void setEntrada1(DateTime entrada1) {
-		this.entrada1 = entrada1;
 	}
 
 	public DateTime getEntrada2() {
@@ -101,8 +86,6 @@ public class Ponto extends Entidade implements Serializable {
 		final int prime = 31;
 		int result = super.hashCode();
 		result = prime * result
-				+ ((entrada1 == null) ? 0 : entrada1.hashCode());
-		result = prime * result
 				+ ((entrada2 == null) ? 0 : entrada2.hashCode());
 		result = prime * result + ((saida1 == null) ? 0 : saida1.hashCode());
 		result = prime * result + ((saida2 == null) ? 0 : saida2.hashCode());
@@ -123,9 +106,7 @@ public class Ponto extends Entidade implements Serializable {
 
 	@Override
 	public String toString() {
-		return "entrada1 = " + entrada1 + " \n, entrada2 = " + entrada2
-				+ " \n, saida1 = " + saida1 + " \n, saida2 = " + saida2
-				+ " \n, total = " + total + "";
+		return saida1.toString();
 	}
 
 }

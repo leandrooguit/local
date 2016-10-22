@@ -2,6 +2,7 @@ package ponto.controller;
 
 import javax.validation.Valid;
 
+import org.hibernate.Hibernate;
 import org.joda.time.LocalDate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.annotation.Secured;
@@ -18,7 +19,6 @@ import org.springframework.web.servlet.ModelAndView;
 import ponto.controller.util.Caminhos;
 import ponto.controller.util.CustomLocalDateEditor;
 import ponto.model.domain.Autorizacao;
-import ponto.model.domain.ELocal;
 import ponto.model.domain.Usuario;
 import ponto.model.service.UsuarioService;
 import ponto.util.Mensagens;
@@ -62,7 +62,7 @@ public class UsuarioController {
 	}
 
 	@Secured(Autorizacao.ROLE_USER)
-	@RequestMapping(value = "/alteracao-senha", method = RequestMethod.PATCH)
+	@RequestMapping(value = "/alteracao-senha", method = RequestMethod.POST)
 	public ModelAndView alteracaoSenha(@ModelAttribute Usuario usuario) {
 		ModelAndView mv = new UsuarioModel(usuario, Caminhos.ALTERAR_SENHA);
 		try {
@@ -90,7 +90,7 @@ public class UsuarioController {
 
 		public UsuarioModel(Usuario usuario, String viewName) {
 			addObject("usuario", usuario);
-			addObject("localidades", ELocal.values());
+//			addObject("localidades", ELocal.values());
 			setViewName(viewName);
 		}
 	}

@@ -35,14 +35,4 @@ public abstract class AbstractService<T extends Entidade, C extends Consulta<T>>
 		return getRepository().get(id);
 	}
 
-	@Transactional(readOnly = true)
-	private void verificarVersao(T entity) throws NegocioException {
-		// @SuppressWarnings("unchecked")
-		// T entityId = getDAO().buscarPorId((ID) entity.getId());
-		//
-		// if (entity.getVersao() < entityId.getVersao()) {
-		// throw new NegocioException("Ops!, por favor repita a operação.");
-		// }
-	}
-
 }

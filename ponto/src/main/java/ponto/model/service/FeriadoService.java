@@ -59,8 +59,8 @@ public class FeriadoService extends AbstractService<Feriado, ConsultaFeriado> {
 		} else {
 			consulta.setMes(dataBase);
 		}
-		consulta.setLocais(new ELocal[] { ELocal.GERAL,
-				usuarioService.getUsuarioCorrenteSpring().getLocal() });
+		/*consulta.setLocais(new ELocal[] { ELocal.GERAL,
+				usuarioService.getUsuarioCorrenteSpring().getLocal() });*/
 		List<Feriado> feriados = consultar(consulta);
 		return feriados;
 	}

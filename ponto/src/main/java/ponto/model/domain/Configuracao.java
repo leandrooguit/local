@@ -14,12 +14,12 @@ import javax.persistence.Table;
 @Table(name = "CON_CONFIGURACAO")
 @AttributeOverrides({
 	@AttributeOverride(name = "id", column = @Column(name = "CON_ID", nullable = false, insertable = true, updatable = false))})
-public class Configuracao extends EntidadeBingo {
+public class Configuracao extends Entidade {
 
 	private Integer quantElementoCartela;
 	private String tipoElemento;
 	@ManyToMany(mappedBy="configuracoes")
-	private List<UsuarioBingo> usuarios;
+	private List<Usuario> usuarios;
 	
 	@Column(name = "CON_QUANT_ELEMENTO_CARTELA")
 	public Integer getQuantElementoCartela() {
@@ -39,11 +39,11 @@ public class Configuracao extends EntidadeBingo {
 		this.tipoElemento = tipoElemento;
 	}
 
-	public List<UsuarioBingo> getUsuarios() {
+	public List<Usuario> getUsuarios() {
 		return usuarios;
 	}
 
-	public void setUsuarios(List<UsuarioBingo> usuarios) {
+	public void setUsuarios(List<Usuario> usuarios) {
 		this.usuarios = usuarios;
 	}
 	

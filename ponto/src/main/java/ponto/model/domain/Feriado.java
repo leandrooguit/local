@@ -15,9 +15,7 @@ import org.joda.time.LocalDate;
 @Entity
 @Table(name = "fer_feriado")
 @AttributeOverrides({
-		@AttributeOverride(name = "id", column = @Column(name = "fer_id", nullable = false, insertable = true, updatable = false)),
-		@AttributeOverride(name = "versao", column = @Column(name = "fer_versao", nullable = false)),
-		@AttributeOverride(name = "dataCadastro", column = @Column(name = "fer_data_cadastro", nullable = false, insertable = true, updatable = false)) })
+		@AttributeOverride(name = "id", column = @Column(name = "fer_id", nullable = false, insertable = true, updatable = false)) })
 public class Feriado extends Entidade implements Serializable {
 
 	private static final long serialVersionUID = 6033608272293976616L;

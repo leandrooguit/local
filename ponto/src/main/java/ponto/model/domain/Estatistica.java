@@ -13,13 +13,13 @@ import javax.persistence.Table;
 @Table(name = "EST_ESTATISTICA")
 @AttributeOverrides({
 	@AttributeOverride(name = "id", column = @Column(name = "EST_ID", nullable = false, insertable = true, updatable = false))})
-public class Estatistica extends EntidadeBingo {
+public class Estatistica extends Entidade {
 
 	private Integer numeroBingo;
 	private Integer tempoResposta;
 	private String tipoErro;
 	private Integer numeroErro;
-	private UsuarioBingo usuario;
+	private Usuario usuario;
 	
 	@Column(name = "EST_NUMERO_BINGO")
 	public Integer getNumeroBingo() {
@@ -59,11 +59,11 @@ public class Estatistica extends EntidadeBingo {
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@Column(name = "USU_ID")
-	public UsuarioBingo getUsuario() {
+	public Usuario getUsuario() {
 		return usuario;
 	}
 
-	public void setUsuario(UsuarioBingo usuario) {
+	public void setUsuario(Usuario usuario) {
 		this.usuario = usuario;
 	}
 	

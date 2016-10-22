@@ -32,22 +32,7 @@ public class ConversorTxt {
 
 	static {
 
-		File time = new File("d:\\pontoNovo\\time.txt");
-		FileReader arq;
-		try {
-			arq = new FileReader(time);
-			BufferedReader lerArq = new BufferedReader(arq);
-
-			String linha = lerArq.readLine();
-			while (linha != null) {
-				String[] split = linha.split("=");
-				mapperNomeLogin.put(split[1], split[0]);
-				linha = lerArq.readLine();
-			}
-			arq.close();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		
 	}
 
 	@Autowired
@@ -125,16 +110,12 @@ public class ConversorTxt {
 								ponto = pontos.get(dia.toString());
 							}
 
-							if (ponto.getEntrada1() == null) {
-								ponto.setEntrada1(dataHora);
-							} else if (ponto.getSaida1() == null) {
+							if (ponto.getSaida1() == null) {
 								ponto.setSaida1(dataHora);
-								ponto.setTotal(calcularTotal(ponto));
 							} else if (ponto.getEntrada2() == null) {
 								ponto.setEntrada2(dataHora);
 							} else if (ponto.getSaida2() == null) {
 								ponto.setSaida2(dataHora);
-								ponto.setTotal(calcularTotal(ponto));
 							}
 							pontos.put(dia.toString(), ponto);
 							linha = lerArq.readLine();
@@ -205,7 +186,7 @@ public class ConversorTxt {
 		for (Ponto ponto : pontos.values()) {
 			cont++;
 			ponto.setUsuario(usuario);
-			ponto.setDataCadastro(ponto.getEntrada1());
+//			ponto.setDataCadastro(ponto.getEntrada1());
 			pontoService.save(ponto);
 		}
 		return cont;
@@ -242,8 +223,8 @@ public class ConversorTxt {
 			usuario.setSenha("123123");
 			usuario.setConfirmacaoSenha("123123");
 			usuario.setLogin(login);
-			usuario.setDataCadastro(dtAtual);
-			usuario.setLocal(ELocal.PE);
+//			usuario.setDataCadastro(dtAtual);
+//			usuario.setLocal(ELocal.PE);
 			try {
 				usuarioService.salvar(usuario);
 				usuariosGerados.put(usuario.getLogin(), usuario);
@@ -253,25 +234,6 @@ public class ConversorTxt {
 		}
 
 		return usuariosGerados;
-	}
-
-	private String calcularTotal(Ponto ponto) {
-		String total = "";
-		if (ponto.getEntrada1() != null && ponto.getSaida1() != null) {
-
-			Interval i1 = new Interval(ponto.getEntrada1(), ponto.getSaida1());
-			total = PontoService.formatter.print(i1.toPeriod()
-					.normalizedStandard());
-
-			if (ponto.getEntrada2() != null && ponto.getSaida2() != null) {
-				Interval i2 = new Interval(ponto.getEntrada2(),
-						ponto.getSaida2());
-				total = PontoService.formatter.print(i1.toPeriod()
-						.plus(i2.toPeriod()).normalizedStandard());
-			}
-
-		}
-		return total;
 	}
 
 }

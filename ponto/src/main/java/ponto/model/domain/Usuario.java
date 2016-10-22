@@ -8,47 +8,53 @@ import javax.persistence.AttributeOverride;
 import javax.persistence.AttributeOverrides;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
+import javax.persistence.DiscriminatorColumn;
+import javax.persistence.DiscriminatorType;
+import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
 import org.hibernate.Hibernate;
 
 @Entity
-@Table(name = "usu_usuario")
+@Table(name = "USU_USUARIO")
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@DiscriminatorColumn(name = "USU_PERFIL", discriminatorType = DiscriminatorType.STRING)
+@DiscriminatorValue("USUARIO")
 @AttributeOverrides({
-		@AttributeOverride(name = "id", column = @Column(name = "usu_id", nullable = false, insertable = true, updatable = false)),
-		@AttributeOverride(name = "versao", column = @Column(name = "usu_versao", nullable = false)),
-		@AttributeOverride(name = "dataCadastro", column = @Column(name = "usu_data_cadastro", nullable = false, insertable = true, updatable = false)) })
+	@AttributeOverride(name = "id", column = @Column(name = "USU_ID", nullable = false, insertable = true, updatable = false))})
 public class Usuario extends Entidade implements Serializable {
 
 	private static final long serialVersionUID = -8854383391546163244L;
 
-	@Column(name = "usu_nome", nullable = false, length = 200)
+	@Column(name = "USU_NOME", nullable = false, length = 200)
 	private String nome;
 
-	@Column(name = "usu_login", nullable = false, unique = true, length = 250)
+	@Column(name = "USU_LOGIN", nullable = false, unique = true, length = 250)
 	private String login;
 
-	@Column(name = "usu_senha", nullable = false, length = 10)
+	@Column(name = "USU_SENHA", nullable = false, length = 10)
 	private String senha;
-
+	
+	@ManyToMany
+    @JoinTable(name="UCO_USUARIO_CONFIGURACAO", joinColumns= @JoinColumn(name="USU_ID") , 
+    	inverseJoinColumns= @JoinColumn(name="CON_ID"))
+	private List<Configuracao> configuracoes;
+	
+	@ManyToMany
+    @JoinTable(name="UJO_USUARIO_JOGO", joinColumns= @JoinColumn(name="USU_ID") , 
+    	inverseJoinColumns= @JoinColumn(name="JOG_ID"))
+	private List<Jogo> jogos;
+	
 	@ManyToMany(cascade = CascadeType.ALL)
-	@JoinTable(name = "usa_usuario_autorizacao", joinColumns = @JoinColumn(name = "usu_id"), inverseJoinColumns = @JoinColumn(name = "aut_autorizacao"))
+	@JoinTable(name = "USU_USUARIO_AUTORIZACAO", joinColumns = @JoinColumn(name = "USU_ID"), inverseJoinColumns = @JoinColumn(name = "AUT_AUTORIZACAO"))
 	private Set<Autorizacao> autorizacoes;
-
-	@OneToMany(cascade = CascadeType.ALL, mappedBy = "usuario")
-	private List<Ponto> dias;
-
-	@Enumerated(EnumType.STRING)
-	@Column(name = "usu_local", nullable = false)
-	private ELocal local;
 
 	@Transient
 	private transient String senhaAtual;
@@ -83,14 +89,6 @@ public class Usuario extends Entidade implements Serializable {
 		this.senha = senha;
 	}
 
-	public Set<Autorizacao> getAutorizacoes() {
-		return autorizacoes;
-	}
-
-	public void setAutorizacoes(Set<Autorizacao> autorizacoes) {
-		this.autorizacoes = autorizacoes;
-	}
-
 	public String getSenhaAtual() {
 		return senhaAtual;
 	}
@@ -107,20 +105,37 @@ public class Usuario extends Entidade implements Serializable {
 		this.confirmacaoSenha = confirmacaoSenha;
 	}
 
-	public List<Ponto> getDias() {
-		return dias;
+	public List<Configuracao> getConfiguracoes() {
+		if (configuracoes != null && !Hibernate.isInitialized(configuracoes)) {
+			Hibernate.initialize(configuracoes);
+		}
+		return configuracoes;
 	}
 
-	public void setDias(List<Ponto> dias) {
-		this.dias = dias;
+	public void setConfiguracoes(List<Configuracao> configuracoes) {
+		this.configuracoes = configuracoes;
 	}
 
-	public ELocal getLocal() {
-		return local;
+	public List<Jogo> getJogos() {
+		if (jogos != null && !Hibernate.isInitialized(jogos)) {
+			Hibernate.initialize(jogos);
+		}
+		return jogos;
 	}
 
-	public void setLocal(ELocal local) {
-		this.local = local;
+	public void setJogos(List<Jogo> jogos) {
+		this.jogos = jogos;
+	}
+
+	public Set<Autorizacao> getAutorizacoes() {
+		if (autorizacoes != null && !Hibernate.isInitialized(autorizacoes)) {
+			Hibernate.initialize(autorizacoes);
+		}
+		return autorizacoes;
+	}
+
+	public void setAutorizacoes(Set<Autorizacao> autorizacoes) {
+		this.autorizacoes = autorizacoes;
 	}
 
 	@Override
@@ -132,9 +147,7 @@ public class Usuario extends Entidade implements Serializable {
 				+ ((autorizacoes == null || !Hibernate
 						.isInitialized(autorizacoes)) ? 0 : autorizacoes
 						.hashCode());
-		result = prime * result + ((dias == null) ? 0 : dias.hashCode());
 		result = prime * result + ((login == null) ? 0 : login.hashCode());
-		result = prime * result + ((local == null) ? 0 : local.hashCode());
 		result = prime * result + ((nome == null) ? 0 : nome.hashCode());
 		result = prime * result + ((senha == null) ? 0 : senha.hashCode());
 		return result;

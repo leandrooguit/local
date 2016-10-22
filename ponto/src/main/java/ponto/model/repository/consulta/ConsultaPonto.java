@@ -7,9 +7,9 @@ import ponto.model.domain.Ponto;
 public class ConsultaPonto extends Consulta<Ponto> {
 
 	private Long idUsuario;
-	private DateTime dataCadastro;
-	private DateTime dataCadastroInicial;
-	private DateTime dataCadastroFinal;
+//	private DateTime dataCadastro;
+//	private DateTime dataCadastroInicial;
+//	private DateTime dataCadastroFinal;
 	private DateTime mesAno;
 
 	private Integer mes;
@@ -24,32 +24,23 @@ public class ConsultaPonto extends Consulta<Ponto> {
 		return this;
 	}
 
-	public DateTime getDataCadastro() {
-		return dataCadastro;
-	}
-
-	public ConsultaPonto setDataCadastro(DateTime dataCadastro) {
-		this.dataCadastro = dataCadastro;
-		return this;
-	}
-
-	public DateTime getDataCadastroInicial() {
-		return dataCadastroInicial;
-	}
-
-	public ConsultaPonto setDataCadastroInicial(DateTime dataCadastroInicial) {
-		this.dataCadastroInicial = dataCadastroInicial;
-		return this;
-	}
-
-	public DateTime getDataCadastroFinal() {
-		return dataCadastroFinal;
-	}
-
-	public ConsultaPonto setDataCadastroFinal(DateTime dataCadastroFinal) {
-		this.dataCadastroFinal = dataCadastroFinal;
-		return this;
-	}
+//	public DateTime getDataCadastroInicial() {
+//		return dataCadastroInicial;
+//	}
+//
+//	public ConsultaPonto setDataCadastroInicial(DateTime dataCadastroInicial) {
+//		this.dataCadastroInicial = dataCadastroInicial;
+//		return this;
+//	}
+//
+//	public DateTime getDataCadastroFinal() {
+//		return dataCadastroFinal;
+//	}
+//
+//	public ConsultaPonto setDataCadastroFinal(DateTime dataCadastroFinal) {
+//		this.dataCadastroFinal = dataCadastroFinal;
+//		return this;
+//	}
 
 	public DateTime getMesAno() {
 		return mesAno;

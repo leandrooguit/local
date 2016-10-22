@@ -12,7 +12,7 @@ import javax.persistence.Table;
 @Table(name = "BOL_BOLA")
 @AttributeOverrides({
 	@AttributeOverride(name = "id", column = @Column(name = "BOL_ID", nullable = false, insertable = true, updatable = false))})
-public class Bola extends EntidadeBingo {
+public class Bola extends Entidade {
 
 	private String desccricao;
 	private byte[] imagem;

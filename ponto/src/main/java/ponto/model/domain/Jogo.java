@@ -16,13 +16,13 @@ import org.joda.time.DateTime;
 @Table(name = "JOG_JOGO")
 @AttributeOverrides({
 	@AttributeOverride(name = "id", column = @Column(name = "JOG_ID", nullable = false, insertable = true, updatable = false))})
-public class Jogo extends EntidadeBingo {
+public class Jogo extends Entidade {
 
 	private Integer numeroJogo;
 	private DateTime dataHora;
 	private Integer tamanhoCartela;
 	@ManyToMany(mappedBy="jogos")
-	private List<UsuarioBingo> usuarios;
+	private List<Usuario> usuarios;
 	
 	@Column(name = "JOG_NUMERO_JOGO")
 	public Integer getNumeroJogo() {
@@ -51,11 +51,11 @@ public class Jogo extends EntidadeBingo {
 		this.tamanhoCartela = tamanhoCartela;
 	}
 	
-	public List<UsuarioBingo> getUsuarios() {
+	public List<Usuario> getUsuarios() {
 		return usuarios;
 	}
 
-	public void setUsuarios(List<UsuarioBingo> usuarios) {
+	public void setUsuarios(List<Usuario> usuarios) {
 		this.usuarios = usuarios;
 	}
 	

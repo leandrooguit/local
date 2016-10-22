@@ -6,7 +6,7 @@ import javax.persistence.Entity;
 
 @Entity
 @DiscriminatorValue("PROFESSOR")
-public class Professor extends UsuarioBingo {
+public class Professor extends Usuario {
 
 	private String disciplina;
 
