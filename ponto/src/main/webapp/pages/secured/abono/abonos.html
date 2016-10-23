@@ -82,11 +82,12 @@
 					</div>
 					<div class="col-md-3" sec:authorize="hasRole('ROLE_ADMIN')">
 						<div class="form-group">
-							<label for="usuario">Usuário</label> <select id="usuario"
-								name="usuario" th:field="*{consulta.idUsuario}" class="form-control">
+							<label for="usuario">Usuário</label> 
+							
+							<select id="usuario" name="usuario" th:field="*{consulta.idUsuario}" class="form-control">
 								<option value="">Todos</option>
-								<option th:each="usuario : ${usuarios}" th:value="${usuario.id}"
-									th:text="${usuario.nome}" />
+								<option th:each="usuario : ${usuarios}" th:value="${usuario.id}" th:text="${usuario.nome}" />
+							</select>
 						</div>
 					</div>
 					<input type="hidden" th:field="*{consulta.idUsuario}"

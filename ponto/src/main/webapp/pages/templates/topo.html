@@ -6,7 +6,7 @@
 			<button type="button" class="navbar-toggle collapsed"
 				data-toggle="collapse" data-target="#navbar" aria-expanded="false"
 				aria-controls="navbar">
-				<span class="sr-only">Navegação</span> <span
+				<span class="sr-only">NavegaÃ§Ã£o</span> <span
 					class="icon-bar"></span> <span class="icon-bar"></span> <span
 					class="icon-bar"></span>
 			</button>
@@ -24,14 +24,17 @@
 						<li><a th:href="@{/feriados}">Feriados</a></li>
 						<li><a th:href="@{/abonos}">Abonos</a></li>
 						<li sec:authorize="hasRole('ROLE_ADMIN')"><a th:href="@{/pontos/gerarPontos}">Gerar</a></li>
-					</ul></li>
+						<li><a th:href="@{/configuracoes}">Configuração</a></li>
+					</ul>
+				</li>
 				<li class="dropdown" sec:authorize="isAuthenticated()"><a href="#" class="dropdown-toggle"
 					data-toggle="dropdown" role="button" aria-haspopup="true"
 					aria-expanded="false">Usuário <span class="caret"></span></a>
 					<ul class="dropdown-menu">
 						<li><a th:href="@{/usuarios/alterar-senha}">Alterar senha</a></li>
 						<li><a th:href="@{/logout}">Sair</a></li>
-					</ul></li>
+					</ul>
+				</li>
 			</ul>
 		</div>
 		<!--/.nav-collapse -->

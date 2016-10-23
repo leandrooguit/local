@@ -43,11 +43,6 @@ public class Usuario extends Entidade implements Serializable {
 	private String senha;
 	
 	@ManyToMany
-    @JoinTable(name="UCO_USUARIO_CONFIGURACAO", joinColumns= @JoinColumn(name="USU_ID") , 
-    	inverseJoinColumns= @JoinColumn(name="CON_ID"))
-	private List<Configuracao> configuracoes;
-	
-	@ManyToMany
     @JoinTable(name="UJO_USUARIO_JOGO", joinColumns= @JoinColumn(name="USU_ID") , 
     	inverseJoinColumns= @JoinColumn(name="JOG_ID"))
 	private List<Jogo> jogos;
@@ -103,17 +98,6 @@ public class Usuario extends Entidade implements Serializable {
 
 	public void setConfirmacaoSenha(String confirmacaoSenha) {
 		this.confirmacaoSenha = confirmacaoSenha;
-	}
-
-	public List<Configuracao> getConfiguracoes() {
-		if (configuracoes != null && !Hibernate.isInitialized(configuracoes)) {
-			Hibernate.initialize(configuracoes);
-		}
-		return configuracoes;
-	}
-
-	public void setConfiguracoes(List<Configuracao> configuracoes) {
-		this.configuracoes = configuracoes;
 	}
 
 	public List<Jogo> getJogos() {

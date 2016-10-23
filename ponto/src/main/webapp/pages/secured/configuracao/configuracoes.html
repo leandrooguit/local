@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html layout:decorator="templates/layout">
+<div layout:fragment="content">
+
+	<div class="row">
+		<div class="col-md-12">
+			<div class="page-header">
+				<h1>Configuração</h1>
+			</div>
+		</div>
+	</div>
+	
+	<div class="row">
+		<div class="col-md-12">
+			<form th:method="post" th:action="@{/configuracoes}">
+				<div class="row">
+					<div class="col-md-6">
+						<div class="form-group">
+							<label for="qtd-elemento-cartela">Qtd elemento na cartela</label> 
+							<input type="text" id="qtd-elemento-cartela" required="required" 
+								class="form-control" th:field="*{configuracao.quantElementoCartela}" />
+						</div>
+					</div>
+					<div class="col-md-6">
+						<div class="form-group">
+							<label for="tipo-elemento">Tipo de elemento</label> 
+							<input type="text" id="tipo-elemento" required="required" 
+								class="form-control" th:field="*{configuracao.tipoElemento}" />
+						</div>
+					</div>
+				</div>
+				<br>
+				<button class="btn btn-success" type="submit">Salvar</button>
+			</form>
+		</div>
+	</div>
+	
+	<br>
+
+	<div class="row">
+		<div class="col-md-12">
+			<form th:method="post" th:action="@{/configuracoes/consultar}">
+				<div class="row">
+					<div class="col-md-3">
+						<div class="form-group">
+							<label for="usuario">Usuário</label>
+							
+							<select id="usuario" name="usuario" th:field="*{consulta.idUsuario}" class="form-control">
+								<option value="">Todos</option>
+								<option th:each="usuario : ${usuarios}" th:value="${usuario.id}" th:text="${usuario.nome}" />
+							</select>
+						</div>
+					</div>
+					
+					<div class="col-md-2">
+						<button class="btn btn-primary" style="margin-top: 24px" type="submit">Consultar</button>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+	
+	<br>
+	
+	<div class="row">
+		<div class="col-md-12">
+			<table class="table">
+				<thead>
+					<tr>
+						<th>Usuário</th>
+						<th>Qtd elemento na cartela</th>
+						<th>Tipo de elemento</th>
+						<th>Ações</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr data-th-each="configuracao : ${configuracoes}">
+						<td data-th-text="${configuracao.usuario.login}"></td>
+						<td data-th-text="${configuracao.quantElementoCartela}"></td>
+						<td data-th-text="${configuracao.tipoElemento}"></td>
+						<td th:if="${usuarioLogado == configuracao.usuario.login || usuarioLogado == 'admin'}">
+							<div class="btn-group" role="group" aria-label="...">
+								<a th:href="@{/configuracoes/{id}/editar(id=${configuracao.id})}" class="btn btn-primary">Editar</a> 
+								<a th:href="@{/configuracoes/{id}/deletar(id=${configuracao.id})}" class="btn btn-danger">Deletar</a> 
+							</div>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+
+</div>
+
+</html>

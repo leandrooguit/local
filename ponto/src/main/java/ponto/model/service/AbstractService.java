@@ -8,7 +8,6 @@ import org.springframework.transaction.annotation.Transactional;
 import ponto.model.domain.Entidade;
 import ponto.model.repository.AbstractRepository;
 import ponto.model.repository.consulta.Consulta;
-import ponto.util.NegocioException;
 
 @Service
 public abstract class AbstractService<T extends Entidade, C extends Consulta<T>> {

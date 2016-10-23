@@ -1,27 +1,29 @@
 package ponto.model.domain;
 
-import java.util.List;
-
 import javax.persistence.AttributeOverride;
 import javax.persistence.AttributeOverrides;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.ManyToMany;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-//Projeto BINGO
 @Entity
 @Table(name = "CON_CONFIGURACAO")
 @AttributeOverrides({
 	@AttributeOverride(name = "id", column = @Column(name = "CON_ID", nullable = false, insertable = true, updatable = false))})
 public class Configuracao extends Entidade {
 
-	private Integer quantElementoCartela;
-	private String tipoElemento;
-	@ManyToMany(mappedBy="configuracoes")
-	private List<Usuario> usuarios;
-	
 	@Column(name = "CON_QUANT_ELEMENTO_CARTELA")
+	private Integer quantElementoCartela;
+	
+	@Column(name = "CON_TIPO_ELEMENTNO")
+	private String tipoElemento;
+	
+	@ManyToOne
+	@JoinColumn(name = "USU_ID")
+	private Usuario usuario;
+	
 	public Integer getQuantElementoCartela() {
 		return quantElementoCartela;
 	}
@@ -30,7 +32,6 @@ public class Configuracao extends Entidade {
 		this.quantElementoCartela = quantElementoCartela;
 	}
 	
-	@Column(name = "CON_TIPO_ELEMENTNO")
 	public String getTipoElemento() {
 		return tipoElemento;
 	}
@@ -39,12 +40,12 @@ public class Configuracao extends Entidade {
 		this.tipoElemento = tipoElemento;
 	}
 
-	public List<Usuario> getUsuarios() {
-		return usuarios;
+	public Usuario getUsuario() {
+		return usuario;
 	}
 
-	public void setUsuarios(List<Usuario> usuarios) {
-		this.usuarios = usuarios;
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
 	}
-	
+
 }
