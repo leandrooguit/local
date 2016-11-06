@@ -17,6 +17,9 @@ import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
+import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
@@ -42,14 +45,18 @@ public class Usuario extends Entidade implements Serializable {
 	@Column(name = "USU_SENHA", nullable = false, length = 10)
 	private String senha;
 	
-	@ManyToMany
-    @JoinTable(name="UJO_USUARIO_JOGO", joinColumns= @JoinColumn(name="USU_ID") , 
-    	inverseJoinColumns= @JoinColumn(name="JOG_ID"))
-	private List<Jogo> jogos;
+	@ManyToOne
+	@JoinColumn(name = "JOG_ID", nullable = true)
+	private Jogo jogo;
 	
 	@ManyToMany(cascade = CascadeType.ALL)
 	@JoinTable(name = "USU_USUARIO_AUTORIZACAO", joinColumns = @JoinColumn(name = "USU_ID"), inverseJoinColumns = @JoinColumn(name = "AUT_AUTORIZACAO"))
 	private Set<Autorizacao> autorizacoes;
+	
+	@OneToOne
+//	@Column(name = "CAR_ID")
+	@PrimaryKeyJoinColumn
+	private Cartela cartela;
 
 	@Transient
 	private transient String senhaAtual;
@@ -100,15 +107,12 @@ public class Usuario extends Entidade implements Serializable {
 		this.confirmacaoSenha = confirmacaoSenha;
 	}
 
-	public List<Jogo> getJogos() {
-		if (jogos != null && !Hibernate.isInitialized(jogos)) {
-			Hibernate.initialize(jogos);
-		}
-		return jogos;
+	public Jogo getJogo() {
+		return jogo;
 	}
 
-	public void setJogos(List<Jogo> jogos) {
-		this.jogos = jogos;
+	public void setJogo(Jogo jogo) {
+		this.jogo = jogo;
 	}
 
 	public Set<Autorizacao> getAutorizacoes() {
@@ -121,6 +125,16 @@ public class Usuario extends Entidade implements Serializable {
 	public void setAutorizacoes(Set<Autorizacao> autorizacoes) {
 		this.autorizacoes = autorizacoes;
 	}
+	
+	public Cartela getCartela() {
+		return cartela;
+	}
+
+	public void setCartela(Cartela cartela) {
+		this.cartela = cartela;
+	}
+	
+	
 
 	@Override
 	public int hashCode() {

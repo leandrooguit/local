@@ -25,6 +25,7 @@
 						<li><a th:href="@{/abonos}">Abonos</a></li>
 						<li sec:authorize="hasRole('ROLE_ADMIN')"><a th:href="@{/pontos/gerarPontos}">Gerar</a></li>
 						<li><a th:href="@{/configuracoes}">Configuração</a></li>
+						<li><a th:href="@{/tipoConjuntos}">Tipo conjunto</a></li>
 					</ul>
 				</li>
 				<li class="dropdown" sec:authorize="isAuthenticated()"><a href="#" class="dropdown-toggle"
