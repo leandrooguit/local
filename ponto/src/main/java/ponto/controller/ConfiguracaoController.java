@@ -15,6 +15,7 @@ import org.springframework.web.servlet.ModelAndView;
 import ponto.controller.util.Caminhos;
 import ponto.model.domain.Autorizacao;
 import ponto.model.domain.Configuracao;
+import ponto.model.domain.EQtdElementoCartela;
 import ponto.model.domain.Usuario;
 import ponto.model.repository.consulta.ConsultaConfiguracao;
 import ponto.model.service.ConfiguracaoService;
@@ -108,6 +109,7 @@ public class ConfiguracaoController {
 		mv.addObject("configuracoes", configuracaoService.consultar(consulta));
 		mv.addObject("usuarioLogado", usuarioService.getUsuarioCorrenteSpring().getLogin());
 		mv.addObject("usuarios", usuarioService.consultarUsuariosParaCombobox());
+		mv.addObject("tipos", EQtdElementoCartela.values());
 		mv.addObject("consulta", consulta == null ? new ConsultaConfiguracao()
 				: consulta);
 	}

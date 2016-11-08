@@ -21,8 +21,6 @@ public class Jogo extends Entidade {
 	private Integer numeroJogo;
 	private DateTime dataHora;
 	private Integer tamanhoCartela;
-	@ManyToMany(mappedBy="jogos")
-	private List<Usuario> usuarios;
 	
 	@Column(name = "JOG_NUMERO_JOGO")
 	public Integer getNumeroJogo() {
@@ -49,14 +47,6 @@ public class Jogo extends Entidade {
 	
 	public void setTamanhoCartela(Integer tamanhoCartela) {
 		this.tamanhoCartela = tamanhoCartela;
-	}
-	
-	public List<Usuario> getUsuarios() {
-		return usuarios;
-	}
-
-	public void setUsuarios(List<Usuario> usuarios) {
-		this.usuarios = usuarios;
 	}
 	
 }

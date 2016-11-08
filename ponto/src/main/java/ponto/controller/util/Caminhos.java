@@ -18,5 +18,7 @@ public interface Caminhos {
 	String ABONOS_VISUALIZAR = "secured/abono/abonos";
 	
 	String CONFIGURACAO_VISUALIZAR = "secured/configuracao/configuracoes";
+	
+	String TIPO_CONJUNTO_VISUALIZAR = "secured/tipoconjunto/tipoConjuntos";
 
 }

@@ -1,10 +1,17 @@
 package ponto.model.domain;
 
+import java.util.List;
+
 import javax.persistence.AttributeOverride;
 import javax.persistence.AttributeOverrides;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
@@ -14,8 +21,9 @@ import javax.persistence.Table;
 	@AttributeOverride(name = "id", column = @Column(name = "CON_ID", nullable = false, insertable = true, updatable = false))})
 public class Configuracao extends Entidade {
 
+	@Enumerated(EnumType.STRING)
 	@Column(name = "CON_QUANT_ELEMENTO_CARTELA")
-	private Integer quantElementoCartela;
+	private EQtdElementoCartela quantElementoCartela;
 	
 	@Column(name = "CON_TIPO_ELEMENTNO")
 	private String tipoElemento;
@@ -24,11 +32,16 @@ public class Configuracao extends Entidade {
 	@JoinColumn(name = "USU_ID")
 	private Usuario usuario;
 	
-	public Integer getQuantElementoCartela() {
+	@ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(name="CTC_CONFIGURACAO_TIPO_CONJUNTO", joinColumns={@JoinColumn(name="CON_ID")}, 
+    	inverseJoinColumns={@JoinColumn(name="TCO_ID")})
+    private List<TipoConjunto> tipoConjuntos;
+	
+	public EQtdElementoCartela getQuantElementoCartela() {
 		return quantElementoCartela;
 	}
 	
-	public void setQuantElementoCartela(Integer quantElementoCartela) {
+	public void setQuantElementoCartela(EQtdElementoCartela quantElementoCartela) {
 		this.quantElementoCartela = quantElementoCartela;
 	}
 	
@@ -48,4 +61,12 @@ public class Configuracao extends Entidade {
 		this.usuario = usuario;
 	}
 
+	public List<TipoConjunto> getTipoConjuntos() {
+		return tipoConjuntos;
+	}
+
+	public void setTipoConjuntos(List<TipoConjunto> tipoConjuntos) {
+		this.tipoConjuntos = tipoConjuntos;
+	}
+	
 }

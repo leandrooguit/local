@@ -5,6 +5,7 @@ import javax.persistence.AttributeOverrides;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
@@ -58,7 +59,7 @@ public class Estatistica extends Entidade {
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@Column(name = "USU_ID")
+	@JoinColumn(name = "USU_ID")
 	public Usuario getUsuario() {
 		return usuario;
 	}

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html layout:decorator="templates/layout">
+<div layout:fragment="content">
+
+	<div class="row">
+		<div class="col-md-12">
+			<div class="page-header">
+				<h1>Tipo Conjunto</h1>
+			</div>
+		</div>
+	</div>
+	
+	<div class="row">
+		<div class="col-md-12">
+			<form th:method="post" th:action="@{/tipoConjuntos}">
+				<div class="row">
+					<div class="col-md-12">
+						<div class="form-group">
+							<label for="tipo-elemento">Descrição</label> 
+							<input type="text" id="descricao" required="required" 
+								class="form-control" th:field="*{tipoConjunto.descricao}" />
+						</div>
+					</div>
+				</div>
+				<br>
+				<button class="btn btn-success" type="submit">Salvar</button>
+			</form>
+		</div>
+	</div>
+	
+	<br>
+	
+	<div class="row">
+		<div class="col-md-12">
+			<form th:method="post" th:action="@{/tipoConjuntos/consultar}">
+				<div class="row">
+					<div class="col-md-3">
+						<div class="form-group">
+							<label for="usuario">Descrição</label>
+							<input type="text" id="descricao" class="form-control" th:field="*{consulta.descricao}" />
+						</div>
+					</div>
+					
+					<div class="col-md-2">
+						<button class="btn btn-primary" style="margin-top: 24px" type="submit">Consultar</button>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+	
+	<br>
+	
+	<div class="row">
+		<div class="col-md-12">
+			<table class="table">
+				<thead>
+					<tr>
+						<th>Código</th>
+						<th>Descrição</th>
+						<th>Ações</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr data-th-each="tipoConjunto : ${tipoConjuntos}">
+						<td data-th-text="${tipoConjunto.id}"></td>
+						<td data-th-text="${tipoConjunto.descricao}"></td>
+						<td>
+							<div class="btn-group" role="group" aria-label="...">
+								<a th:href="@{/tipoConjuntos/{id}/editar(id=${tipoConjunto.id})}" class="btn btn-primary">Editar</a> 
+								<a th:href="@{/tipoConjuntos/{id}/deletar(id=${tipoConjunto.id})}" class="btn btn-danger">Deletar</a> 
+							</div>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+
+</div>
+
+</html>
