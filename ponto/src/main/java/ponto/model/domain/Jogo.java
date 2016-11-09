@@ -1,12 +1,9 @@
 package ponto.model.domain;
 
-import java.util.List;
-
 import javax.persistence.AttributeOverride;
 import javax.persistence.AttributeOverrides;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 import org.joda.time.DateTime;
@@ -18,11 +15,15 @@ import org.joda.time.DateTime;
 	@AttributeOverride(name = "id", column = @Column(name = "JOG_ID", nullable = false, insertable = true, updatable = false))})
 public class Jogo extends Entidade {
 
+	@Column(name = "JOG_NUMERO_JOGO")
 	private Integer numeroJogo;
+	
+	@Column(name = "JOG_DH_JOGO")
 	private DateTime dataHora;
+	
+	@Column(name = "JOG_TAMANHO_CARTELA")
 	private Integer tamanhoCartela;
 	
-	@Column(name = "JOG_NUMERO_JOGO")
 	public Integer getNumeroJogo() {
 		return numeroJogo;
 	}
@@ -31,7 +32,6 @@ public class Jogo extends Entidade {
 		this.numeroJogo = numeroJogo;
 	}
 	
-	@Column(name = "JOG_NUMERO_JOGO")
 	public DateTime getDataHora() {
 		return dataHora;
 	}
@@ -40,7 +40,6 @@ public class Jogo extends Entidade {
 		this.dataHora = dataHora;
 	}
 	
-	@Column(name = "JOG_TAMANHO_CARTELA")
 	public Integer getTamanhoCartela() {
 		return tamanhoCartela;
 	}
@@ -48,5 +47,4 @@ public class Jogo extends Entidade {
 	public void setTamanhoCartela(Integer tamanhoCartela) {
 		this.tamanhoCartela = tamanhoCartela;
 	}
-	
 }
