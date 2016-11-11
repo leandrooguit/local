@@ -1,17 +1,12 @@
 package ponto.model.domain;
 
-import java.util.List;
-
 import javax.persistence.AttributeOverride;
 import javax.persistence.AttributeOverrides;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
-import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
@@ -25,17 +20,13 @@ public class Configuracao extends Entidade {
 	@Column(name = "CON_QUANT_ELEMENTO_CARTELA")
 	private EQtdElementoCartela quantElementoCartela;
 	
-	@Column(name = "CON_TIPO_ELEMENTNO")
-	private String tipoElemento;
-	
 	@ManyToOne
 	@JoinColumn(name = "USU_ID")
 	private Usuario usuario;
 	
-	@ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(name="CTC_CONFIGURACAO_TIPO_CONJUNTO", joinColumns={@JoinColumn(name="CON_ID")}, 
-    	inverseJoinColumns={@JoinColumn(name="TCO_ID")})
-    private List<TipoConjunto> tipoConjuntos;
+	@ManyToOne
+	@JoinColumn(name = "TCO_ID")
+	private TipoConjunto tipoConjunto;
 	
 	public EQtdElementoCartela getQuantElementoCartela() {
 		return quantElementoCartela;
@@ -45,14 +36,6 @@ public class Configuracao extends Entidade {
 		this.quantElementoCartela = quantElementoCartela;
 	}
 	
-	public String getTipoElemento() {
-		return tipoElemento;
-	}
-	
-	public void setTipoElemento(String tipoElemento) {
-		this.tipoElemento = tipoElemento;
-	}
-
 	public Usuario getUsuario() {
 		return usuario;
 	}
@@ -61,12 +44,12 @@ public class Configuracao extends Entidade {
 		this.usuario = usuario;
 	}
 
-	public List<TipoConjunto> getTipoConjuntos() {
-		return tipoConjuntos;
+	public TipoConjunto getTipoConjunto() {
+		return tipoConjunto;
 	}
 
-	public void setTipoConjuntos(List<TipoConjunto> tipoConjuntos) {
-		this.tipoConjuntos = tipoConjuntos;
+	public void setTipoConjunto(TipoConjunto tipoConjunto) {
+		this.tipoConjunto = tipoConjunto;
 	}
 	
 }

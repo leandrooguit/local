@@ -21,5 +21,13 @@ public class Cartela extends Entidade {
     @JoinTable(name="CBO_CARTELA_BOLA", joinColumns={@JoinColumn(name="CAR_ID")}, 
     	inverseJoinColumns={@JoinColumn(name="BOL_ID")})
     private List<Bola> bolas;
+
+	public List<Bola> getBolas() {
+		return bolas;
+	}
+
+	public void setBolas(List<Bola> bolas) {
+		this.bolas = bolas;
+	}
 	
 }

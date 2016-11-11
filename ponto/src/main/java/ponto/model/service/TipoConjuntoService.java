@@ -38,8 +38,15 @@ public class TipoConjuntoService extends AbstractService<TipoConjunto, ConsultaT
 	}
 	
 	@Transactional(readOnly = true)
+	public TipoConjunto load(Long id) {
+		ConsultaTipoConjunto consulta = new ConsultaTipoConjunto();
+		consulta.setId(id);
+		return consultar(consulta).get(0);
+	}
+	
+	@Transactional(readOnly = true)
 	public List<TipoConjunto> buscarTodos(ConsultaTipoConjunto consulta) {
 		return consultar(consulta);
 	}
-
+	
 }

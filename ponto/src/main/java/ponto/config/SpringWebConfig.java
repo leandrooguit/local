@@ -2,6 +2,7 @@ package ponto.config;
 
 import nz.net.ultraq.thymeleaf.JodaDialect;
 import nz.net.ultraq.thymeleaf.LayoutDialect;
+import ponto.controller.TipoConjuntoConverter;
 
 import org.eclipse.jetty.server.Server;
 import org.springframework.boot.context.embedded.EmbeddedServletContainerFactory;
@@ -11,6 +12,8 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Description;
+import org.springframework.format.support.DefaultFormattingConversionService;
+import org.springframework.format.support.FormattingConversionService;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
@@ -89,6 +92,20 @@ public class SpringWebConfig extends WebMvcConfigurerAdapter {
 				.addResourceLocations("/resources/").setCachePeriod(3600)
 				.resourceChain(true).addResolver(new GzipResourceResolver())
 				.addResolver(new PathResourceResolver());
+	}
+	
+	@Bean
+	public FormattingConversionService mvcConversionService() {
+		DefaultFormattingConversionService conversionService = new DefaultFormattingConversionService();
+		conversionService.addConverter(new TipoConjuntoConverter());
+		
+		/*NumberStyleFormatter bigDecimalFormatter = new NumberStyleFormatter("#,##0.00");
+		conversionService.addFormatterForFieldType(BigDecimal.class, bigDecimalFormatter);
+		
+		NumberStyleFormatter integerFormatter = new NumberStyleFormatter("#,##0");
+		conversionService.addFormatterForFieldType(Integer.class, integerFormatter);*/
+		
+		return conversionService;
 	}
 
 }

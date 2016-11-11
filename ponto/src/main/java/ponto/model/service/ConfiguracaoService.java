@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import ponto.model.domain.Configuracao;
+import ponto.model.domain.TipoConjunto;
 import ponto.model.repository.AbstractRepository;
 import ponto.model.repository.ConfiguracaoRepository;
 import ponto.model.repository.consulta.ConsultaConfiguracao;
@@ -20,6 +21,9 @@ public class ConfiguracaoService extends AbstractService<Configuracao, ConsultaC
 	@Autowired
 	private UsuarioService usuarioService;
 	
+	@Autowired
+	private TipoConjuntoService tipoConjuntoService;
+	
 	@Override
 	protected AbstractRepository<ConsultaConfiguracao, Configuracao> getRepository() {
 		return repository;
@@ -32,6 +36,11 @@ public class ConfiguracaoService extends AbstractService<Configuracao, ConsultaC
 		validador.lancarErros();
 		configuracao.setUsuario(usuarioService.getRepository().get(
 				configuracao.getUsuario().getId()));
+		
+		Long id = configuracao.getTipoConjunto().getId();
+		TipoConjunto tipoConjunto = tipoConjuntoService.load(id);
+		configuracao.setTipoConjunto(tipoConjunto);
+		
 		repository.saveOrUpdate(configuracao);
 	}
 	

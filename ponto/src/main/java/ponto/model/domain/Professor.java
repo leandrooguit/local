@@ -8,9 +8,9 @@ import javax.persistence.Entity;
 @DiscriminatorValue("PROFESSOR")
 public class Professor extends Usuario {
 
+	@Column(name = "USU_DISCIPLINA")
 	private String disciplina;
 
-	@Column(name = "USU_DISCIPLINA")
 	public String getDisciplina() {
 		return disciplina;
 	}

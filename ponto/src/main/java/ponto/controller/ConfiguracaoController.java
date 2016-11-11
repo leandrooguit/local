@@ -18,7 +18,9 @@ import ponto.model.domain.Configuracao;
 import ponto.model.domain.EQtdElementoCartela;
 import ponto.model.domain.Usuario;
 import ponto.model.repository.consulta.ConsultaConfiguracao;
+import ponto.model.repository.consulta.ConsultaTipoConjunto;
 import ponto.model.service.ConfiguracaoService;
+import ponto.model.service.TipoConjuntoService;
 import ponto.model.service.UsuarioService;
 import ponto.util.Mensagens;
 import ponto.util.NegocioException;
@@ -33,6 +35,9 @@ public class ConfiguracaoController {
 	
 	@Autowired
 	private UsuarioService usuarioService;
+	
+	@Autowired
+	private TipoConjuntoService tipoConjuntoService;
 	
 	@Secured(Autorizacao.ROLE_USER)
 	@RequestMapping(value = "", method = RequestMethod.GET)
@@ -110,6 +115,7 @@ public class ConfiguracaoController {
 		mv.addObject("usuarioLogado", usuarioService.getUsuarioCorrenteSpring().getLogin());
 		mv.addObject("usuarios", usuarioService.consultarUsuariosParaCombobox());
 		mv.addObject("tipos", EQtdElementoCartela.values());
+		mv.addObject("tipoConjuntos", tipoConjuntoService.buscarTodos(new ConsultaTipoConjunto()));
 		mv.addObject("consulta", consulta == null ? new ConsultaConfiguracao()
 				: consulta);
 	}

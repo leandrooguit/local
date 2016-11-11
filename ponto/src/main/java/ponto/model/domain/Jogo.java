@@ -8,7 +8,6 @@ import javax.persistence.Table;
 
 import org.joda.time.DateTime;
 
-//Projeto BINGO
 @Entity
 @Table(name = "JOG_JOGO")
 @AttributeOverrides({
@@ -18,7 +17,7 @@ public class Jogo extends Entidade {
 	@Column(name = "JOG_NUMERO_JOGO")
 	private Integer numeroJogo;
 	
-	@Column(name = "JOG_DH_JOGO")
+	@Column(name = "JOG_DATA_HORA")
 	private DateTime dataHora;
 	
 	@Column(name = "JOG_TAMANHO_CARTELA")
@@ -47,4 +46,5 @@ public class Jogo extends Entidade {
 	public void setTamanhoCartela(Integer tamanhoCartela) {
 		this.tamanhoCartela = tamanhoCartela;
 	}
+	
 }

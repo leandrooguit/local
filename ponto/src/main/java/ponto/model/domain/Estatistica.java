@@ -16,13 +16,22 @@ import javax.persistence.Table;
 	@AttributeOverride(name = "id", column = @Column(name = "EST_ID", nullable = false, insertable = true, updatable = false))})
 public class Estatistica extends Entidade {
 
+	@Column(name = "EST_NUMERO_BINGO")
 	private Integer numeroBingo;
+	
+	@Column(name = "EST_TEMPO_RESPOSTA")
 	private Integer tempoResposta;
+	
+	@Column(name = "EST_TIPO_ERRO")
 	private String tipoErro;
+	
+	@Column(name = "EST_NUMERO_ERRO")
 	private Integer numeroErro;
+	
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "USU_ID")
 	private Usuario usuario;
 	
-	@Column(name = "EST_NUMERO_BINGO")
 	public Integer getNumeroBingo() {
 		return numeroBingo;
 	}
@@ -31,7 +40,6 @@ public class Estatistica extends Entidade {
 		this.numeroBingo = numeroBingo;
 	}
 
-	@Column(name = "EST_TEMPO_RESPOSTA")
 	public Integer getTempoResposta() {
 		return tempoResposta;
 	}
@@ -40,7 +48,6 @@ public class Estatistica extends Entidade {
 		this.tempoResposta = tempoResposta;
 	}
 	
-	@Column(name = "EST_TIPO_ERRO")
 	public String getTipoErro() {
 		return tipoErro;
 	}
@@ -49,7 +56,6 @@ public class Estatistica extends Entidade {
 		this.tipoErro = tipoErro;
 	}
 	
-	@Column(name = "EST_NUMERO_ERRO")
 	public Integer getNumeroErro() {
 		return numeroErro;
 	}
@@ -58,8 +64,6 @@ public class Estatistica extends Entidade {
 		this.numeroErro = numeroErro;
 	}
 
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "USU_ID")
 	public Usuario getUsuario() {
 		return usuario;
 	}
