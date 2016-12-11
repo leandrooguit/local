@@ -20,5 +20,7 @@ public interface Caminhos {
 	String CONFIGURACAO_VISUALIZAR = "secured/configuracao/configuracoes";
 	
 	String TIPO_CONJUNTO_VISUALIZAR = "secured/tipoconjunto/tipoConjuntos";
+	
+	String BOLA_VISUALIZAR = "secured/bola/bolas";
 
 }
