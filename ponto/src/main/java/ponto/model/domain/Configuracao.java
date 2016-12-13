@@ -11,7 +11,6 @@ import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
@@ -25,18 +24,20 @@ public class Configuracao extends Entidade {
 	@Column(name = "CON_QUANT_ELEMENTO_CARTELA")
 	private EQtdElementoCartela quantElementoCartela;
 	
-	@Column(name = "CON_TIPO_ELEMENTNO")
-	private String tipoElemento;
-	
 	@ManyToOne
 	@JoinColumn(name = "USU_ID")
 	private Usuario usuario;
 	
-	@ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(name="CTC_CONFIGURACAO_TIPO_CONJUNTO", joinColumns={@JoinColumn(name="CON_ID")}, 
-    	inverseJoinColumns={@JoinColumn(name="TCO_ID")})
-    private List<TipoConjunto> tipoConjuntos;
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "TCO_ID")
+    private TipoConjunto tipoConjunto;
 	
+	@Column(name = "CON_TAMANHO_VERTICAL")
+	private String tamVeritical;
+	
+	@Column(name = "CON_TAMANHO_HORIZONTAL")
+	private String tamHorizontal;
+
 	public EQtdElementoCartela getQuantElementoCartela() {
 		return quantElementoCartela;
 	}
@@ -45,14 +46,6 @@ public class Configuracao extends Entidade {
 		this.quantElementoCartela = quantElementoCartela;
 	}
 	
-	public String getTipoElemento() {
-		return tipoElemento;
-	}
-	
-	public void setTipoElemento(String tipoElemento) {
-		this.tipoElemento = tipoElemento;
-	}
-
 	public Usuario getUsuario() {
 		return usuario;
 	}
@@ -61,12 +54,27 @@ public class Configuracao extends Entidade {
 		this.usuario = usuario;
 	}
 
-	public List<TipoConjunto> getTipoConjuntos() {
-		return tipoConjuntos;
+	public TipoConjunto getTipoConjunto() {
+		return tipoConjunto;
 	}
 
-	public void setTipoConjuntos(List<TipoConjunto> tipoConjuntos) {
-		this.tipoConjuntos = tipoConjuntos;
+	public void setTipoConjunto(TipoConjunto tipoConjunto) {
+		this.tipoConjunto = tipoConjunto;
 	}
-	
+
+	public String getTamVeritical() {
+		return tamVeritical;
+	}
+
+	public void setTamVeritical(String tamVeritical) {
+		this.tamVeritical = tamVeritical;
+	}
+
+	public String getTamHorizontal() {
+		return tamHorizontal;
+	}
+
+	public void setTamHorizontal(String tamHorizontal) {
+		this.tamHorizontal = tamHorizontal;
+	}
 }

@@ -59,7 +59,7 @@ public class SpringWebConfig extends WebMvcConfigurerAdapter {
 	@Bean
 	public EmbeddedServletContainerFactory servletContainer() {
 		JettyEmbeddedServletContainerFactory jetty = new JettyEmbeddedServletContainerFactory();
-		jetty.setContextPath("/pontoNovo");
+		jetty.setContextPath("/bingo");
 		jetty.setPort(8080);
 		jetty.addServerCustomizers(new JettyServerCustomizer() {
 

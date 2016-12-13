@@ -28,8 +28,9 @@
 					<div class="col-md-6">
 						<div class="form-group">
 							<label for="tipo-elemento">Tipo conjunto</label> 
-							<input type="text" id="tipo-conjunto" required="required" 
-								class="form-control" th:field="*{configuracao.tipoElemento}" />
+							<select id="tp-elemento-cartela" th:field="*{configuracao.tipoConjunto}" class="form-control">
+									<option th:each="tipoConj : ${tiposConjunto}" th:value="${tipoConj.id}"
+									th:text="${tipoConj.descricao}" />
 						</div>
 					</div>
 				</div>
@@ -81,7 +82,7 @@
 					<tr data-th-each="configuracao : ${configuracoes}">
 						<td data-th-text="${configuracao.usuario.login}"></td>
 						<td data-th-text="${configuracao.quantElementoCartela}"></td>
-						<td data-th-text="${configuracao.tipoElemento}"></td>
+						<td data-th-text="${configuracao.tipoConjunto}"></td>
 						<td th:if="${usuarioLogado == configuracao.usuario.login || usuarioLogado == 'admin'}">
 							<div class="btn-group" role="group" aria-label="...">
 								<a th:href="@{/configuracoes/{id}/editar(id=${configuracao.id})}" class="btn btn-primary">Editar</a> 

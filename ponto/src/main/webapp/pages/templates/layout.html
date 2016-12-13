@@ -10,7 +10,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="HandheldFriendly" content="True">
 <meta name="apple-mobile-web-app-status-bar-style" content="black">
-<title>Ponto</title>
+<title>Bingo</title>
 <link rel="stylesheet" type="text/css"
 	th:href="@{/resources/css/normalize.css}" />
 <link rel="stylesheet" type="text/css"
@@ -29,11 +29,17 @@
 </head>
 <body>
 	<div class="container">
-	
+
 		<div layout:fragment="header" th:include="templates/topo :: header"></div>
 		<div sec:authorize="isAuthenticated()">
-			<form method="post" th:action="@{/pontos/registrar}">
-				<button type="submit" class="btn btn-success">Registrar</button>
+			<form method="get" th:action="@{/configuracoes/configurar}">
+				<button type="submit" class="btn btn-success">Configurar
+					jogo</button>
+			</form>
+		</div>
+		<div sec:authorize="isAuthenticated()">
+			<form method="get" th:action="@{/jogo}">
+				<button type="submit" class="btn btn-success">Jogar</button>
 			</form>
 		</div>
 
@@ -67,18 +73,13 @@
 			<div layout:fragment="content">Fake content</div>
 		</div>
 
-		<!-- Fim corpo site -->
-	</div>
+		<script th:src="@{/resources/js/jquery.js}" type="text/javascript"></script>
+		<script th:src="@{/resources/js/bootstrap.min.js}"
+			type="text/javascript"></script>
+		<script th:src="@{/resources/js/jquery-ui.min.js}"
+			type="text/javascript"></script>
+		<script th:src="@{/resources/js/sistema.js}" type="text/javascript"></script>
 
-	<script th:src="@{/resources/js/jquery.js}" type="text/javascript"></script>
-	<script th:src="@{/resources/js/bootstrap.min.js}"
-		type="text/javascript"></script>
-	<script th:src="@{/resources/js/jquery-ui.min.js}"
-		type="text/javascript"></script>
-	<script th:src="@{/resources/js/sistema.js}"
-		type="text/javascript"></script>
-		
-	<div layout:fragment="scripts"></div>
-		
+		<div layout:fragment="scripts"></div>
 </body>
 </html>

@@ -1,7 +1,6 @@
 package ponto.model.domain;
 
 import java.io.Serializable;
-import java.util.List;
 import java.util.Set;
 
 import javax.persistence.AttributeOverride;
