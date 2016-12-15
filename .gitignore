@@ -1,0 +1,13 @@
+*.class
+ponto/target/classes/ponto/model/domain/Jogo.class
+*.class
+ponto/target/classes/ponto/model/domain/Jogo.class
+*.class
+ponto/target/classes/ponto/model/domain/Jogo.class
+*.class
+ponto/target/classes/application.properties
+ponto/target/classes/application.properties
+ponto/target/classes/ponto/config/SpringPersistenceConfig.class
+ponto/target/classes/ponto/controller/util/Caminhos.class
+ponto/target/classes/ponto/config/SpringPersistenceConfig.class
+ponto/src/main/webapp/pages/secured/configuracao/configuracoes.html

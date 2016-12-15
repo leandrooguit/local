@@ -17,22 +17,20 @@
 					<div class="col-md-4">
 						<div class="form-group">
 							<label for="qtd-elemento-cartela">Qtd elemento na cartela</label> 
-								<select id="qtd-elemento-cartela" th:field="*{configuracao.quantElementoCartela}" class="form-control" required="required" >
-									<option value="">Selecione</option>
+							<!-- <input type="text" id="qtd-elemento-cartela" required="required" 
+								class="form-control" th:field="*{configuracao.quantElementoCartela}" /> -->
+								
+								<select id="qtd-elemento-cartela" th:field="*{configuracao.quantElementoCartela}" class="form-control">
 									<option th:each="tipo : ${tipos}" th:value="${tipo}"
-									th:text="${tipo.descricao}"></option>
-								</select>
+									th:text="${tipo.descricao}" />
 						</div>
 					</div>
 					<div class="col-md-6">
 						<div class="form-group">
-							<label for="tipo-conjunto">Tipo conjunto</label> 
-							<select id="tipo-conjunto" th:field="*{configuracao.tipoConjunto}" class="form-control" required="required" >
-								<option value="">Selecione</option>
-								<option th:each="tipoConjunto : ${tipoConjuntos}" th:value="${tipoConjunto.id}" 
-								th:text="${tipoConjunto.descricao}">
-								</option>
-							</select>
+							<label for="tipo-elemento">Tipo conjunto</label> 
+							<select id="tp-elemento-cartela" th:field="*{configuracao.tipoConjunto.id}" class="form-control">
+									<option th:each="tipoConj : ${tiposConjunto}" th:value="${tipoConj.id}"
+									th:text="${tipoConj.descricao}" />
 						</div>
 					</div>
 				</div>
@@ -84,7 +82,7 @@
 					<tr data-th-each="configuracao : ${configuracoes}">
 						<td data-th-text="${configuracao.usuario.login}"></td>
 						<td data-th-text="${configuracao.quantElementoCartela}"></td>
-						<td data-th-text="${configuracao.tipoConjunto.descricao}"></td>
+						<td data-th-text="${configuracao.tipoConjunto}"></td>
 						<td th:if="${usuarioLogado == configuracao.usuario.login || usuarioLogado == 'admin'}">
 							<div class="btn-group" role="group" aria-label="...">
 								<a th:href="@{/configuracoes/{id}/editar(id=${configuracao.id})}" class="btn btn-primary">Editar</a> 

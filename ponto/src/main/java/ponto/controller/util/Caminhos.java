@@ -17,10 +17,17 @@ public interface Caminhos {
 
 	String ABONOS_VISUALIZAR = "secured/abono/abonos";
 	
+	String JOGO = "secured/jogo/jogo";
+	
 	String CONFIGURACAO_VISUALIZAR = "secured/configuracao/configuracoes";
 	
 	String TIPO_CONJUNTO_VISUALIZAR = "secured/tipoconjunto/tipoConjuntos";
 	
 	String BOLA_VISUALIZAR = "secured/bola/bolas";
 
+	
+	//--------BINGO-------------
+	String CRIAR_JOGOS = "secured/jogos/criar";
+	
+	String VISUALIZAR_CARTELA = "secured/jogo/cartela";
 }

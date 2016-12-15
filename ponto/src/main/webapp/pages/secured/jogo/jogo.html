@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html layout:decorator="templates/layout">
+<div layout:fragment="content">
+
+	<div class="row">
+		<div class="col-md-12">
+			<div class="page-header">
+				<h1>Jogos</h1>
+			</div>
+		</div>
+	</div>
+
+	<br>
+	<div th:if="${#lists.isEmpty(configuracoes)}">
+		<div style="width: 80%;"
+					class="alert alert-danger alert-dismissible center-block"
+					role="alert">
+					<button type="button" class="close" data-dismiss="alert"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+						<p>Não há jogos cadastrados para jogar</p>
+				</div>
+	</div>
+	<div th:if="${not #lists.isEmpty(configuracoes)}">
+
+		<div class="row">
+			<div class="col-md-12">
+				<table class="table">
+					<thead>
+						<tr>
+							<th>Usuário</th>
+							<th>Qtd elemento na cartela</th>
+							<th>Tipo de elemento</th>
+							<th>Ações</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr data-th-each="configuracao : ${configuracoes}">
+							<td data-th-text="${configuracao.usuario.login}"></td>
+							<td data-th-text="${configuracao.quantElementoCartela}"></td>
+							<td data-th-text="${configuracao.tipoConjunto.descricao}"></td>
+							<td
+								th:if="${usuarioLogado == configuracao.usuario.login || usuarioLogado == 'admin'}">
+								<div class="btn-group" role="group" aria-label="...">
+									<a
+										th:href="@{/configuracoes/{id}/editar(id=${configuracao.id})}"
+										class="btn btn-primary">Jogar</a> 
+								</div>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+</div>
+
+</html>
