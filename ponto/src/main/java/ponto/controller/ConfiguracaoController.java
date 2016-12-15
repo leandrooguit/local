@@ -1,7 +1,6 @@
 package ponto.controller;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.annotation.Secured;
@@ -41,7 +40,7 @@ public class ConfiguracaoController {
 	private TipoConjuntoService tipoConjuntoService;
 	
 	@Secured(Autorizacao.ROLE_USER)
-	@RequestMapping(value = "/configurar", method = RequestMethod.GET)
+	@RequestMapping(value = "configurar", method = RequestMethod.GET)
 	public ModelAndView configuracao() {
 		ModelAndView mv = new ModelAndView(Caminhos.CONFIGURACAO_VISUALIZAR);
 		Configuracao configuracao = new Configuracao();
@@ -49,18 +48,6 @@ public class ConfiguracaoController {
 				.getUsuarioCorrenteSpring();
 		configuracao.setUsuario(usuarioCorrenteSpring);
 		mv.addObject("configuracao", configuracao);
-		addObjects(mv, null);
-		return mv;
-	}
-	
-	@Secured(Autorizacao.ROLE_USER)
-	@RequestMapping(value = "", method = RequestMethod.GET)
-	public ModelAndView jogar() {
-		ModelAndView mv = new ModelAndView(Caminhos.JOGO);
-		ConsultaConfiguracao consulta = new ConsultaConfiguracao();
-		consulta.setIdUsuario(usuarioService.getUsuarioCorrenteSpring()
-				.getId());
-		mv.addObject("configuracoes", configuracaoService.consultar(consulta));
 		addObjects(mv, null);
 		return mv;
 	}
@@ -75,13 +62,10 @@ public class ConfiguracaoController {
 	
 	@Secured(Autorizacao.ROLE_USER)
 	@RequestMapping(value = "", method = RequestMethod.POST)
-	public ModelAndView salvar(Configuracao configuracao,
+	public ModelAndView salvar(@ModelAttribute Configuracao configuracao,
 			HttpServletRequest request) {
 		ModelAndView mv = new ModelAndView(Caminhos.CONFIGURACAO_VISUALIZAR);
 		try {
-			if (configuracao.getId() != null ){
-				configuracao.setId(null);
-			}
 			configuracaoService.salvar(configuracao);
 			mv.setViewName("redirect:configuracoes");
 		} catch (NegocioException e) {
@@ -131,7 +115,7 @@ public class ConfiguracaoController {
 		mv.addObject("usuarioLogado", usuarioService.getUsuarioCorrenteSpring().getLogin());
 		mv.addObject("usuarios", usuarioService.consultarUsuariosParaCombobox());
 		mv.addObject("tipos", EQtdElementoCartela.values());
-		mv.addObject("tiposConjunto", tipoConjuntoService.buscarTodos(new ConsultaTipoConjunto()));
+		mv.addObject("tipoConjuntos", tipoConjuntoService.buscarTodos(new ConsultaTipoConjunto()));
 		mv.addObject("consulta", consulta == null ? new ConsultaConfiguracao()
 				: consulta);
 	}

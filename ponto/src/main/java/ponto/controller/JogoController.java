@@ -49,7 +49,7 @@ public class JogoController {
 	@RequestMapping(value = "", method = RequestMethod.POST)
 	public ModelAndView doManter(@ModelAttribute Abono abono,
 			HttpServletRequest request) {
-		ModelAndView mv = new ModelAndView(Caminhos.ABONOS_VISUALIZAR);
+		ModelAndView mv = new ModelAndView(Caminhos.JOGO_VISUALIZAR);
 		try {
 			policy(abono, request);
 			jogoService.manterAbono(abono);
@@ -75,7 +75,7 @@ public class JogoController {
 	@Secured(Autorizacao.ROLE_USER)
 	@RequestMapping(value = "", method = RequestMethod.GET)
 	public ModelAndView jogar() {
-		ModelAndView mv = new ModelAndView(Caminhos.JOGO);
+		ModelAndView mv = new ModelAndView(Caminhos.JOGO_VISUALIZAR);
 		ConsultaConfiguracao consulta = new ConsultaConfiguracao();
 		consulta.setIdUsuario(usuarioService.getUsuarioCorrenteSpring()
 				.getId());
@@ -87,7 +87,7 @@ public class JogoController {
 	@Secured(Autorizacao.ROLE_USER)
 	@RequestMapping(value = "/consultar", method = RequestMethod.POST)
 	public ModelAndView pontos(@ModelAttribute ConsultaAbono consulta) {
-		ModelAndView mv = new ModelAndView(Caminhos.ABONOS_VISUALIZAR);
+		ModelAndView mv = new ModelAndView(Caminhos.JOGO_VISUALIZAR);
 		addObjects(mv, consulta);
 		return mv;
 	}
@@ -95,7 +95,7 @@ public class JogoController {
 	@Secured(Autorizacao.ROLE_USER)
 	@RequestMapping(value = "/{id}/editar", method = RequestMethod.GET)
 	public ModelAndView abonos(@PathVariable("id") String id) {
-		ModelAndView mv = new ModelAndView(Caminhos.ABONOS_VISUALIZAR);
+		ModelAndView mv = new ModelAndView(Caminhos.JOGO_VISUALIZAR);
 		ConsultaAbono consulta = new ConsultaAbono();
 		consulta.setId(Long.valueOf(id));
 		//mv.addObject("abono", jogoService.buscar(consulta));
@@ -120,7 +120,7 @@ public class JogoController {
 	@RequestMapping(value = "/{id}/deletar", method = RequestMethod.GET)
 	public ModelAndView deletar(@PathVariable("id") String id,
 			HttpServletRequest request) {
-		ModelAndView mv = new ModelAndView(Caminhos.ABONOS_VISUALIZAR);
+		ModelAndView mv = new ModelAndView(Caminhos.JOGO_VISUALIZAR);
 		Abono abono = null;//jogoService.get(Long.valueOf(id));
 		try {
 			policy(abono, request);
@@ -137,7 +137,7 @@ public class JogoController {
 	@Secured(Autorizacao.ROLE_ADMIN)
 	@RequestMapping(value = "/{id}/aprovar", method = RequestMethod.GET)
 	public ModelAndView aprovar(@PathVariable("id") String id) {
-		ModelAndView mv = new ModelAndView(Caminhos.ABONOS_VISUALIZAR);
+		ModelAndView mv = new ModelAndView(Caminhos.JOGO_VISUALIZAR);
 		jogoService.aprovar(Long.valueOf(id));
 		addObjects(mv, null);
 		addObjects(mv, null);
@@ -152,3 +152,4 @@ public class JogoController {
 	}
 
 }
+

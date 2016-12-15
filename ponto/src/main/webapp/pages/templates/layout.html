@@ -29,17 +29,11 @@
 </head>
 <body>
 	<div class="container">
-
+	
 		<div layout:fragment="header" th:include="templates/topo :: header"></div>
 		<div sec:authorize="isAuthenticated()">
-			<form method="get" th:action="@{/configuracoes/configurar}">
-				<button type="submit" class="btn btn-success">Configurar
-					jogo</button>
-			</form>
-		</div>
-		<div sec:authorize="isAuthenticated()">
-			<form method="get" th:action="@{/jogo}">
-				<button type="submit" class="btn btn-success">Jogar</button>
+			<form method="post" th:action="@{/pontos/registrar}">
+				<button type="submit" class="btn btn-success">Registrar</button>
 			</form>
 		</div>
 
@@ -56,7 +50,18 @@
 				</span>
 			</div>
 		</div>
-
+		<div sec:authorize="isAuthenticated()">
+			<form method="get" th:action="@{/jogo}">
+				<button type="submit" class="btn btn-success">Jogar</button>
+			</form>
+		</div>
+		
+		<div sec:authorize="isAuthenticated()">
+			<form method="get" th:action="@{/configuracoes/configurar}">
+				<button type="submit" class="btn btn-success">Configurar
+					jogo</button>
+			</form>
+		</div>
 		<div th:if="${msgSuccess != null}">
 			<div style="width: 80%;"
 				class="alert alert-success alert-dismissible center-block"
@@ -73,13 +78,18 @@
 			<div layout:fragment="content">Fake content</div>
 		</div>
 
-		<script th:src="@{/resources/js/jquery.js}" type="text/javascript"></script>
-		<script th:src="@{/resources/js/bootstrap.min.js}"
-			type="text/javascript"></script>
-		<script th:src="@{/resources/js/jquery-ui.min.js}"
-			type="text/javascript"></script>
-		<script th:src="@{/resources/js/sistema.js}" type="text/javascript"></script>
+		<!-- Fim corpo site -->
+	</div>
 
-		<div layout:fragment="scripts"></div>
+	<script th:src="@{/resources/js/jquery.js}" type="text/javascript"></script>
+	<script th:src="@{/resources/js/bootstrap.min.js}"
+		type="text/javascript"></script>
+	<script th:src="@{/resources/js/jquery-ui.min.js}"
+		type="text/javascript"></script>
+	<script th:src="@{/resources/js/sistema.js}"
+		type="text/javascript"></script>
+		
+	<div layout:fragment="scripts"></div>
+		
 </body>
 </html>

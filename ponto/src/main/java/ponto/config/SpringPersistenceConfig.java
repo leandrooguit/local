@@ -31,7 +31,7 @@ import com.mchange.v2.c3p0.ComboPooledDataSource;
 		JerseyAutoConfiguration.class })
 @EnableCaching
 public class SpringPersistenceConfig {
-	
+
 	@Autowired
 	private Environment env;
 
@@ -40,7 +40,7 @@ public class SpringPersistenceConfig {
 		ComboPooledDataSource dataSource = new ComboPooledDataSource();
 		try {
 			dataSource.setDriverClass("org.hsqldb.jdbc.JDBCDriver");
-			dataSource.setJdbcUrl("jdbc:hsqldb:hsql://localhost/");
+			dataSource.setJdbcUrl("jdbc:hsqldb:hsql://localhost:56999/teste");
 			dataSource.setUser("SA");
 			dataSource.setPassword("");
 			// dataSource.setDriverClass(env.getProperty("driverClass"));
