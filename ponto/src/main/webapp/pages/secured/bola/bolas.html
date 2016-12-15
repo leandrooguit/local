@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html layout:decorator="templates/layout">
+<div layout:fragment="content">
+
+	<div class="row">
+		<div class="col-md-12">
+			<div class="page-header">
+				<h1>Bola</h1>
+			</div>
+		</div>
+	</div>
+	
+	<div class="row">
+		<div class="col-md-12">
+			<form th:method="post" th:action="@{/bolas}">
+				<div class="row">
+					<div class="col-md-6">
+						<div class="form-group">
+							<label for="nome">Nome</label>
+							<input type="text" id="nome" required="required" class="form-control" th:field="*{bola.nome}" />
+						</div>
+					</div>
+					<div class="col-md-4">
+						<div class="form-group">
+							<label for="tipo-conjunto">Tipo conjunto</label> 
+							<select id="tipo-conjunto" th:field="*{bola.tipoConjunto}" class="form-control" required="required" >
+								<option value="">Selecione</option>
+								<option th:each="tipoConjunto : ${tipoConjuntos}" th:value="${tipoConjunto.id}" 
+								th:text="${tipoConjunto.descricao}">
+								</option>
+							</select>
+						</div>
+					</div>
+					<div class="col-md-2">
+						<div class="form-group">
+							<label for="numero">Número</label> 
+							<input type="text" id="numero" required="required" class="form-control" th:field="*{bola.numero}" />
+						</div>
+					</div>
+				</div>
+				<br>
+				<button class="btn btn-success" type="submit">Salvar</button>
+			</form>
+		</div>
+	</div>
+	
+	<br>
+	
+	<div class="row">
+		<div class="col-md-12">
+			<form th:method="post" th:action="@{/bolas/consultar}">
+				<div class="row">
+					<div class="col-md-3">
+						<div class="form-group">
+							<label for="tipo-conjunto-consulta">Tipo conjunto</label> 
+							<select id="tipo-conjunto-consulta" th:field="*{consulta.tipoConjunto}" class="form-control" required="required" >
+								<option value="">Selecione</option>
+								<option th:each="tipoConjunto : ${tipoConjuntos}" th:value="${tipoConjunto.id}" 
+								th:text="${tipoConjunto.descricao}">
+								</option>
+							</select>
+						</div>
+					</div>
+					
+					<div class="col-md-2">
+						<button class="btn btn-primary" style="margin-top: 24px" type="submit">Consultar</button>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+	
+	<br>
+	
+	<div class="row">
+		<div class="col-md-12">
+			<table class="table">
+				<thead>
+					<tr>
+						<th>Imagem</th>
+						<th>Nome</th>
+						<th>Número</th>
+						<th>Tipo de elemento</th>
+						<th>Ações</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr data-th-each="bola : ${bolas}">
+						<td></td>
+						<td data-th-text="${bola.nome}"></td>
+						<td data-th-text="${bola.numero}"></td>
+						<td data-th-text="${bola.tipoConjunto.descricao}"></td>
+						<td>
+							<div class="btn-group" role="group" aria-label="...">
+								<a th:href="@{/bolas/{id}/editar(id=${bola.id})}" class="btn btn-primary">Editar</a> 
+								<a th:href="@{/bolas/{id}/deletar(id=${bola.id})}" class="btn btn-danger">Deletar</a> 
+							</div>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+	
+</div>
+
+</html>

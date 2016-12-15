@@ -18,6 +18,9 @@ public class TipoConjuntoRepository extends AbstractRepository<ConsultaTipoConju
 
 	@Override
 	protected Criteria extrairCriterios(Criteria criteria, ConsultaTipoConjunto consulta) {
+		if (consulta.getId() != null) {
+			criteria.add(Restrictions.eq("id", consulta.getId()));
+		}
 		if (StringUtils.isNotEmpty(consulta.getDescricao())) {
 			criteria.add(Restrictions.eq("descricao", consulta.getDescricao()));
 		}

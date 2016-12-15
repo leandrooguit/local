@@ -11,6 +11,7 @@ import javax.persistence.DiscriminatorColumn;
 import javax.persistence.DiscriminatorType;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
@@ -44,7 +45,7 @@ public class Usuario extends Entidade implements Serializable {
 	@Column(name = "USU_SENHA", nullable = false, length = 10)
 	private String senha;
 	
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "JOG_ID", nullable = true)
 	private Jogo jogo;
 	
@@ -52,7 +53,7 @@ public class Usuario extends Entidade implements Serializable {
 	@JoinTable(name = "USU_USUARIO_AUTORIZACAO", joinColumns = @JoinColumn(name = "USU_ID"), inverseJoinColumns = @JoinColumn(name = "AUT_AUTORIZACAO"))
 	private Set<Autorizacao> autorizacoes;
 	
-	@OneToOne
+	@OneToOne(fetch = FetchType.LAZY)
 //	@Column(name = "CAR_ID")
 	@PrimaryKeyJoinColumn
 	private Cartela cartela;

@@ -1,12 +1,19 @@
 package ponto.model.domain;
 
+import java.util.List;
+
 import javax.persistence.AttributeOverride;
 import javax.persistence.AttributeOverrides;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.Lob;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -28,6 +35,11 @@ public class Bola extends Entidade {
 	@ManyToOne
 	@JoinColumn(name = "TCO_ID")
 	private TipoConjunto tipoConjunto;
+	
+	@ManyToMany(fetch = FetchType.EAGER)
+	@JoinTable(name = "BOLA_RESPOSTA", joinColumns = @JoinColumn(name = "BOL_ID"), 
+	inverseJoinColumns = @JoinColumn(name = "BRE_ID"))
+	private List<Bola> respostas;
 	
 	public String getNome() {
 		return nome;
@@ -60,5 +72,13 @@ public class Bola extends Entidade {
 	public void setTipoConjunto(TipoConjunto tipoConjunto) {
 		this.tipoConjunto = tipoConjunto;
 	}
-	
+
+	public List<Bola> getRespostas() {
+		return respostas;
+	}
+
+	public void setRespostas(List<Bola> respostas) {
+		this.respostas = respostas;
+	}
+
 }

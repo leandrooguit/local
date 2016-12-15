@@ -4,7 +4,16 @@ import ponto.model.domain.TipoConjunto;
 
 public class ConsultaTipoConjunto extends Consulta<TipoConjunto> {
 
+	private Long id;
 	private String descricao;
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
 
 	public String getDescricao() {
 		return descricao;
@@ -15,6 +24,7 @@ public class ConsultaTipoConjunto extends Consulta<TipoConjunto> {
 	}
 	
 	public void addCamposLista() {
+		addCampo("id");
 		addCampo("descricao");
 	}
 	

@@ -12,6 +12,7 @@ import javax.persistence.Table;
 	@AttributeOverride(name = "id", column = @Column(name = "TCO_ID", nullable = false, insertable = true, updatable = false))})
 public class TipoConjunto extends Entidade {
 
+	@Column(name = "TCO_DESCRICAO")
 	private String descricao;
 
 	public String getDescricao() {
