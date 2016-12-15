@@ -26,4 +26,6 @@ public interface Caminhos {
 	
 	//--------BINGO-------------
 	String CRIAR_JOGOS = "secured/jogos/criar";
+	
+	String VISUALIZAR_CARTELA = "secured/jogo/cartela";
 }

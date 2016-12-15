@@ -28,7 +28,7 @@
 					<div class="col-md-6">
 						<div class="form-group">
 							<label for="tipo-elemento">Tipo conjunto</label> 
-							<select id="tp-elemento-cartela" th:field="*{configuracao.tipoConjunto}" class="form-control">
+							<select id="tp-elemento-cartela" th:field="*{configuracao.tipoConjunto.id}" class="form-control">
 									<option th:each="tipoConj : ${tiposConjunto}" th:value="${tipoConj.id}"
 									th:text="${tipoConj.descricao}" />
 						</div>

@@ -79,7 +79,7 @@ public class JogoController {
 		ConsultaConfiguracao consulta = new ConsultaConfiguracao();
 		consulta.setIdUsuario(usuarioService.getUsuarioCorrenteSpring()
 				.getId());
-		mv.addObject("configuracoes", configuracaoService.buscar(consulta));
+		mv.addObject("configuracoes", configuracaoService.consultar(consulta));
 		addObjects(mv, null);
 		return mv;
 	}

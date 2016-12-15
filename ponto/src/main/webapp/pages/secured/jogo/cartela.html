@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html layout:decorator="templates/layout">
+<div layout:fragment="content">
+
+	<div class="row">
+		<div class="col-md-12">
+			<div class="page-header">
+				<h1>Fique atento</h1>
+			</div>
+		</div>
+	</div>
+				<div th:each="data, row: ${datas}" th:with="numList=${ {3,2,1,0} }" th:if="${row.count % 4 == 0 or row.last}" class="span3">
+				    <!-- Show all rows except the leftovers -->
+				    <span th:each="num : ${numList}" th:with="dataIndex=(${row.index} - ${num})" th:if="${row.count % 4 == 0}" th:text="${[dataIndex]}">data</span>
+				    <!-- Show the remainders (eg, if there are 9 items, the last row will have one item in it) -->
+				    <span th:each="num : ${numList}" th:with="dataIndex=(${row.index} - ${num})" th:if="${row.last} and ${row.count % 4 != 0} and ${num &lt; row.count % 4}" th:text="${datas[dataIndex]}">data</span>
+				</div>
+
+	<br>
+		<div class="row">
+			<div class="col-md-12">
+				<table class="table">
+					<tbody>
+						<tr th:each="emp,iterationStatus  : ${configuracoes}">
+
+					        <td th:each="emp2,iterationStatus2  : ${tipos}"/>1
+					
+					      </tr>
+						
+					</tbody>
+				</table>
+			</div>
+	</div>
+</div>
+
+</html>

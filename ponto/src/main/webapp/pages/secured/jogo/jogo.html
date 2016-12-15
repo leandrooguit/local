@@ -39,15 +39,13 @@
 						<tr data-th-each="configuracao : ${configuracoes}">
 							<td data-th-text="${configuracao.usuario.login}"></td>
 							<td data-th-text="${configuracao.quantElementoCartela}"></td>
-							<td data-th-text="${configuracao.tipoElemento}"></td>
+							<td data-th-text="${configuracao.tipoConjunto.descricao}"></td>
 							<td
 								th:if="${usuarioLogado == configuracao.usuario.login || usuarioLogado == 'admin'}">
 								<div class="btn-group" role="group" aria-label="...">
 									<a
 										th:href="@{/configuracoes/{id}/editar(id=${configuracao.id})}"
-										class="btn btn-primary">Editar</a> <a
-										th:href="@{/configuracoes/{id}/deletar(id=${configuracao.id})}"
-										class="btn btn-danger">Deletar</a>
+										class="btn btn-primary">Jogar</a> 
 								</div>
 							</td>
 						</tr>
